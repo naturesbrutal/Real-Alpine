@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Alpine Reset — Hangover Defense</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --orange: #3B9EFF;
+      --orange-dim: rgba(59, 158, 255, 0.12);
+      --orange-glow: rgba(59, 158, 255, 0.06);
+      --bg: #0A1628;
+      --surface: #0e1e36;
+      --surface-2: #122444;
+      --border: rgba(255, 255, 255, 0.07);
+      --border-orange: rgba(59, 158, 255, 0.25);
+      --white: #ffffff;
+      --gray-1: #8FA8C0;
+      --gray-2: #506070;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image:
+        radial-gradient(ellipse 120% 60% at 50% 0%, rgba(59,158,255,0.05) 0%, transparent 60%),
+        radial-gradient(ellipse 80% 40% at 20% 30%, rgba(59,158,255,0.04) 0%, transparent 50%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; background: #0A1628; }
+    ::-webkit-scrollbar-thumb { background: #1a3a5c; border-radius: 0; }
+    ::selection { background: var(--orange); color: #0A1628; }
+
+    /* ─── ANNOUNCEMENT BAR ─── */
+    .announcement-bar {
+      background: linear-gradient(90deg, #0a1e38 0%, #0d2444 50%, #0a1e38 100%);
+      border-bottom: 1px solid rgba(59, 158, 255, 0.2);
+      color: #3B9EFF;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 9px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .announcement-inner {
+      display: inline-flex;
+      gap: 80px;
+      animation: marquee 25s linear infinite;
+    }
+
+    .announcement-inner span { display: inline-block; }
+
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ─── NAVIGATION ─── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 22, 40, 0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(59, 158, 255, 0.1);
+      padding: 0 5%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo {
+      width: 140px;
+      height: auto;
+      filter: invert(1);
+    }
+
+
+    /* ─── HERO ─── */
+    .hero {
+      height: calc(100vh - 97px);
+      min-height: 620px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: 60% center;
+      display: block;
+    }
+
+    /* Dark overlay: heavy left → transparent right, like Mars Men */
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg,
+          rgba(4, 10, 22, 0.88) 0%,
+          rgba(4, 10, 22, 0.72) 38%,
+          rgba(4, 10, 22, 0.28) 62%,
+          rgba(4, 10, 22, 0.00) 80%
+        ),
+        linear-gradient(180deg,
+          rgba(4, 10, 22, 0.30) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba(4, 10, 22, 0.50) 100%
+        );
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 580px;
+      padding: 0 0 0 8%;
+    }
+
+    .hero-stars {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .stars-icon { color: #3B9EFF; font-size: 16px; letter-spacing: 3px; }
+    .stars-text { font-size: 13px; color: rgba(255,255,255,0.75); letter-spacing: 0.03em; }
+    .stars-text strong { color: #fff; }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 4.0vw, 60px);
+      font-weight: 900;
+      line-height: 0.97;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.4);
+    }
+
+    .hero-title span { color: var(--orange); }
+
+    .hero-desc {
+      font-size: 15px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.72);
+      max-width: 420px;
+      margin-bottom: 24px;
+      text-shadow: 0 1px 8px rgba(0,0,0,0.5);
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #3B9EFF 0%, #2980e4 100%);
+      color: #fff;
+      border: none;
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 17px 44px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 8px 32px rgba(59,158,255,0.35), 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-2px); box-shadow: 0 14px 40px rgba(59,158,255,0.42), 0 4px 12px rgba(0,0,0,0.4); }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-ghost {
+      background: none;
+      color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.3);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 16px 28px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 28px;
+      letter-spacing: 0.02em;
+    }
+
+    .hero-trust-icon {
+      font-size: 14px;
+    }
+
+    .hero-pills {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hero-pill {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 6px 14px;
+      border-radius: 0;
+    }
+
+    /* ─── SECTION UTILITIES ─── */
+    .section {
+      padding: 100px 6%;
+    }
+
+    .section-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 16px;
+    }
+
+    .section-label::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--orange);
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 62px);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .section-title em { color: var(--orange); font-style: normal; }
+
+    .section-desc {
+      font-size: 17px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.6);
+      max-width: 640px;
+    }
+
+    /* ─── INGREDIENTS SECTION ─── */
+    .ingredients-section {
+      background: var(--bg);
+      padding: 120px 7%;
+    }
+
+    .ingredients-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .ingredients-header .section-label {
+      justify-content: center;
+    }
+
+    .ingredients-header .section-label::before { display: none; }
+
+    .ingredients-header .section-title {
+      font-size: clamp(30px, 4.5vw, 56px);
+      max-width: 700px;
+      margin: 0 auto 16px;
+    }
+
+    .ingredients-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .ingredient-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      border-radius: 16px;
+      cursor: default;
+    }
+
+    .ingredient-card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .ingredient-card:hover .ingredient-card-img {
+      transform: scale(1.05);
+    }
+
+    /* Dark gradient — heavy top-left for text readability, lighter bottom-right to let image breathe */
+    .ingredient-card-overlay {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(4, 8, 18, 0.82) 0%,
+          rgba(4, 8, 18, 0.60) 45%,
+          rgba(4, 8, 18, 0.25) 100%
+        );
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px 20px 18px;
+      border-radius: 16px;
+    }
+
+    .ingredient-card-top {}
+
+    .ingredient-card-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.05;
+      margin-bottom: 9px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+    }
+
+    .ingredient-card-desc {
+      font-size: 12.5px;
+      line-height: 1.55;
+      color: rgba(255, 255, 255, 0.80);
+      text-shadow: 0 1px 6px rgba(0,0,0,0.6);
+      max-width: 92%;
+    }
+
+    .ingredient-card-bottom {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .ingredient-card-dose {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #0A1628;
+      background: #ffffff;
+      padding: 5px 13px;
+      border-radius: 20px;
+    }
+
+    /* ─── PROBLEM SECTION ─── */
+    .problem-section {
+      padding: 100px 6%;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .problem-tag {
+      display: inline-block;
+      background: rgba(59, 158, 255, 0.12);
+      border: 1px solid rgba(59, 158, 255, 0.3);
+      color: #3B9EFF;
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      margin-bottom: 20px;
+    }
+
+    .problem-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 0.97;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .problem-title em { color: var(--orange); font-style: normal; display: block; }
+
+    .problem-body {
+      font-size: 16px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 20px;
+    }
+
+    .problem-stat-row {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    .problem-stat {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 24px;
+    }
+
+    .problem-stat-num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--orange);
+      margin-bottom: 6px;
+    }
+
+    .problem-stat-label {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--gray-1);
+    }
+
+    .problem-graph-wrap {
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+    }
+
+    .problem-graph {
+      width: 100%;
+      height: auto;
+      min-height: 380px;
+      display: block;
+      border-radius: 18px;
+      box-shadow:
+        0 0 0 1px rgba(59,158,255,0.12),
+        0 32px 80px rgba(0,0,0,0.6),
+        0 4px 24px rgba(59,158,255,0.10);
+    }
+
+    /* ─── SOLUTION SECTION ─── */
+    .solution-section {
+      background: var(--surface);
+      padding: 100px 6%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .solution-image {
+      position: sticky;
+      top: 80px;
+    }
+
+    .solution-image img {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+    }
+
+    .solution-content {}
+
+    .solution-intro {
+      font-size: 16px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 40px;
+    }
+
+    .solution-checklist {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .solution-check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .solution-check-item:first-child { border-top: 1px solid var(--border); }
+
+    .check-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      border: 1px solid var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .check-icon svg { width: 12px; height: 12px; stroke: var(--orange); fill: none; stroke-width: 2.5; }
+
+    .check-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .check-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--gray-1);
+    }
+
+    /* ─── HOW IT WORKS SECTION ─── */
+    .how-section {
+      padding: 100px 6%;
+    }
+
+    .how-header {
+      max-width: 680px;
+      margin-bottom: 60px;
+    }
+
+    .ingredient-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .ingredient-row {
+      display: grid;
+      grid-template-columns: 80px 1fr 160px;
+      gap: 40px;
+      align-items: center;
+      padding: 36px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .ingredient-row:first-child { border-top: 1px solid var(--border); }
+
+    .ingredient-num {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--orange);
+      line-height: 1;
+      opacity: 0.9;
+    }
+
+    .ingredient-info-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .ingredient-info-dose {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      background: var(--orange-dim);
+      padding: 3px 10px;
+      margin-bottom: 12px;
+    }
+
+    .ingredient-info-text {
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.6);
+      max-width: 600px;
+    }
+
+    .ingredient-row-img-wrap {
+      width: 160px;
+      height: 160px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      align-self: center;
+    }
+
+    .ingredient-row-img-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(5,13,26,0.45) 0%, rgba(5,13,26,0.15) 100%);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+
+    .ingredient-row-img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      flex-shrink: 0;
+    }
+
+    /* ─── LIFESTYLE SECTION ─── */
+    .lifestyle-section {
+      position: relative;
+      height: 560px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lifestyle-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .lifestyle-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      background: linear-gradient(to right, rgba(6,13,26,0.88) 35%, rgba(6,13,26,0.2) 100%);
+    }
+
+    .lifestyle-content {
+      position: relative;
+      z-index: 3;
+      padding: 0 6%;
+      width: 100%;
+    }
+
+    .lifestyle-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 8vw, 96px);
+      font-weight: 900;
+      line-height: 0.9;
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      max-width: 700px;
+    }
+
+    .lifestyle-title span { color: var(--orange); display: block; }
+
+    .lifestyle-sub {
+      margin-top: 20px;
+      font-size: 16px;
+      color: rgba(255,255,255,0.6);
+      max-width: 420px;
+      line-height: 1.7;
+    }
+
+    /* ─── COMBINE SECTION ─── */
+    .combine-section {
+      background: var(--surface);
+      padding: 100px 6%;
+    }
+
+    .combine-header {
+      margin-bottom: 48px;
+    }
+
+    .combine-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .combine-card {
+      background: var(--bg);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s;
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .combine-card:hover { opacity: 0.92; }
+
+    .combine-card-photo {
+      width: 100%;
+      aspect-ratio: 512 / 847;
+      overflow: hidden;
+      display: block;
+      position: relative;
+    }
+
+    .combine-card-photo::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 28px;
+      background: linear-gradient(
+        to bottom,
+        var(--surface) 0%,
+        transparent 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .combine-card-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .combine-card:hover .combine-card-photo img { transform: scale(1.04); }
+
+    .combine-card-body {
+      padding: 24px;
+    }
+
+    .combine-card-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .combine-card-desc {
+      font-size: 13px;
+      color: var(--gray-1);
+      line-height: 1.5;
+    }
+
+    /* ─── FAQ SECTION ─── */
+    .faq-section {
+      padding: 100px 6%;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .faq-section .section-label { justify-content: flex-start; }
+
+    .accordion {
+      margin-top: 48px;
+    }
+
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .accordion-item:first-child {
+      border-top: 1px solid var(--border);
+    }
+
+    .accordion-btn {
+      width: 100%;
+      background: none;
+      border: none;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 17px;
+      font-weight: 500;
+      text-align: left;
+      padding: 24px 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      transition: color 0.2s;
+    }
+
+    .accordion-btn:hover { color: var(--orange); }
+
+    .accordion-icon {
+      width: 28px;
+      height: 28px;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+      font-weight: 300;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .accordion-btn.open .accordion-icon {
+      background: var(--orange);
+      border-color: var(--orange);
+    }
+
+    .accordion-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.6);
+      padding-bottom: 24px;
+      display: none;
+    }
+
+    .accordion-body.open { display: block; }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      background: #0e1e36;
+      border-top: 1px solid rgba(59, 158, 255, 0.1);
+      padding: 80px 6% 40px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+
+    .footer-logo {
+      width: 180px;
+      height: auto;
+      filter: invert(1);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .footer-tagline {
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--gray-2);
+      max-width: 280px;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-links a {
+      color: var(--gray-2);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--white); }
+
+    .footer-bottom {
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--gray-2);
+      letter-spacing: 0.05em;
+    }
+
+    .footer-wordmark { display: none; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .ingredients-grid { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; padding: 60px 5% 40px; min-height: auto; }
+      .hero-image-wrap { order: -1; }
+      .hero-product-img { max-width: 280px; }
+      .problem-section { grid-template-columns: 1fr; gap: 50px; }
+      .solution-section { grid-template-columns: 1fr; gap: 50px; }
+      .ingredients-grid { grid-template-columns: repeat(2, 1fr); }
+      .combine-grid { grid-template-columns: 1fr; }
+      .ingredient-row { grid-template-columns: 60px 1fr; }
+      .ingredient-row-img-wrap { display: none; }
+      .nav-links { display: none; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      .footer-bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ANNOUNCEMENT BAR -->
+  <div class="announcement-bar">
+    <div class="announcement-inner">
+      <span>Free US Shipping On Orders Over $75</span>
+      <span>★</span>
+      <span>10,000+ Five-Star Reviews</span>
+      <span>★</span>
+      <span>30-Day Money-Back Guarantee</span>
+      <span>★</span>
+      <span>Made In The USA · cGMP Certified</span>
+      <span>★</span>
+      <span>Free US Shipping On Orders Over $75</span>
+      <span>★</span>
+      <span>10,000+ Five-Star Reviews</span>
+      <span>★</span>
+      <span>30-Day Money-Back Guarantee</span>
+      <span>★</span>
+      <span>Made In The USA · cGMP Certified</span>
+      <span>★</span>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <nav class="nav">
+    <img src="alpine logo.png" alt="Alpine Nutrition" class="nav-logo" />
+    <a href="#" class="btn-primary" style="font-size:13px;padding:11px 28px;letter-spacing:0.06em;">Shop Now — $21.99</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <img src="new alpine landing page.png" alt="" class="hero-bg" />
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-stars">
+        <span class="stars-icon">★★★★★</span>
+        <span class="stars-text"><strong>4.9</strong> · 2,400+ reviews</span>
+      </div>
+      <h1 class="hero-title">
+        Alpine Reset<br>
+        The Science-Backed<br>
+        <span>Alcohol Recovery</span><br>
+        Formula
+      </h1>
+      <p class="hero-desc">
+        6 clinically-dosed ingredients that replenish electrolytes, support liver detox, and restore your body so you wake up feeling human again.
+      </p>
+      <div class="hero-cta-group">
+        <a href="#" class="btn-primary">Shop Now — $21.99 →</a>
+        <a href="#how" class="btn-ghost">See How It Works</a>
+      </div>
+      <div class="hero-trust">
+        <span class="hero-trust-icon">🛡</span>
+        Backed by Princeton neuroscience research
+      </div>
+      <div class="hero-pills">
+        <span class="hero-pill">Liver Function</span>
+        <span class="hero-pill">Rapid Hydration</span>
+        <span class="hero-pill">Next Day Recovery</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- INGREDIENTS GRID SECTION -->
+  <section class="ingredients-section">
+    <div class="ingredients-header">
+      <h2 class="section-title">8 Ingredients in<br><em>1 Powerful Formula</em></h2>
+      <div style="font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-top:12px;">Clinically Dosed &nbsp;·&nbsp; Effective</div>
+    </div>
+
+    <div class="ingredients-grid">
+
+      <div class="ingredient-card">
+        <img src="DHM.webp" alt="DHM" class="ingredient-card-img" />
+        <div class="ingredient-card-overlay">
+          <div class="ingredient-card-top">
+            <div class="ingredient-card-name">DHM</div>
+            <div class="ingredient-card-desc">Supports alcohol metabolism and reduces next-day fatigue.</div>
+          </div>
+          <div class="ingredient-card-bottom">
+            <div class="ingredient-card-dose">1,000 mg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ingredient-card">
+        <img src="NAC.jpg" alt="NAC" class="ingredient-card-img" />
+        <div class="ingredient-card-overlay">
+          <div class="ingredient-card-top">
+            <div class="ingredient-card-name">NAC</div>
+            <div class="ingredient-card-desc">Replenishes glutathione and supports liver detoxification.</div>
+          </div>
+          <div class="ingredient-card-bottom">
+            <div class="ingredient-card-dose">600 mg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ingredient-card">
+        <img src="milk-thistle.jpg" alt="Milk Thistle" class="ingredient-card-img" />
+        <div class="ingredient-card-overlay">
+          <div class="ingredient-card-top">
+            <div class="ingredient-card-name">Milk Thistle</div>
+            <div class="ingredient-card-desc">Protects liver cells and promotes regeneration.</div>
+          </div>
+          <div class="ingredient-card-bottom">
+            <div class="ingredient-card-dose">300 mg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ingredient-card">
+        <img src="vitamin-b.jpg" alt="B Vitamins" class="ingredient-card-img" />
+        <div class="ingredient-card-overlay">
+          <div class="ingredient-card-top">
+            <div class="ingredient-card-name">B Vitamins</div>
+            <div class="ingredient-card-desc">Replenishes nutrients depleted by alcohol metabolism.</div>
+          </div>
+          <div class="ingredient-card-bottom">
+            <div class="ingredient-card-dose">Complex</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ingredient-card">
+        <img src="electrolytes.jpg" alt="Electrolytes" class="ingredient-card-img" />
+        <div class="ingredient-card-overlay">
+          <div class="ingredient-card-top">
+            <div class="ingredient-card-name">Electrolytes</div>
+            <div class="ingredient-card-desc">Restores hydration and mineral balance.</div>
+          </div>
+          <div class="ingredient-card-bottom">
+            <div class="ingredient-card-dose">500 mg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ingredient-card">
+        <img src="magnesium.webp" alt="Magnesium" class="ingredient-card-img" />
+        <div class="ingredient-card-overlay">
+          <div class="ingredient-card-top">
+            <div class="ingredient-card-name">Magnesium</div>
+            <div class="ingredient-card-desc">Supports relaxation, sleep quality, and muscle recovery.</div>
+          </div>
+          <div class="ingredient-card-bottom">
+            <div class="ingredient-card-dose">200 mg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ingredient-card">
+        <img src="L-Theanine.avif" alt="L-Theanine" class="ingredient-card-img" />
+        <div class="ingredient-card-overlay">
+          <div class="ingredient-card-top">
+            <div class="ingredient-card-name">L-Theanine</div>
+            <div class="ingredient-card-desc">Promotes calm focus and reduces alcohol-induced anxiety.</div>
+          </div>
+          <div class="ingredient-card-bottom">
+            <div class="ingredient-card-dose">200 mg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ingredient-card">
+        <img src="zinc.jpeg" alt="Zinc" class="ingredient-card-img" />
+        <div class="ingredient-card-overlay">
+          <div class="ingredient-card-top">
+            <div class="ingredient-card-name">Zinc</div>
+            <div class="ingredient-card-desc">Supports immune function and replenishes minerals lost overnight.</div>
+          </div>
+          <div class="ingredient-card-bottom">
+            <div class="ingredient-card-dose">15 mg</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PROBLEM SECTION -->
+  <section class="problem-section">
+    <div>
+      <div class="problem-tag">The Science</div>
+      <h2 class="problem-title">
+        The Decline of<br>
+        <em>Your Morning</em>
+      </h2>
+      <p class="problem-body">
+        A hangover isn't just "being tired." It's a cascade of physiological damage happening in real time. When you drink, alcohol disrupts nearly every system in your body — depleting critical nutrients, triggering inflammation, taxing your liver, and destroying your sleep architecture.
+      </p>
+      <p class="problem-body">
+        Most people just suffer through it. They reach for greasy food, painkillers, or coffee — all of which do nothing to address the actual biological mechanisms driving their misery.
+      </p>
+      <p class="problem-body">
+        The science on hangover recovery has advanced dramatically. We now know exactly why hangovers happen and, more importantly, exactly how to stop them.
+      </p>
+      <div class="problem-stat-row">
+        <div class="problem-stat">
+          <div class="problem-stat-num">77%</div>
+          <div class="problem-stat-label">of adults experience hangovers at least monthly</div>
+        </div>
+        <div class="problem-stat">
+          <div class="problem-stat-num">$X</div>
+          <div class="problem-stat-label">Billions lost annually in hangover-related productivity</div>
+        </div>
+        <div class="problem-stat">
+          <div class="problem-stat-num">8hrs</div>
+          <div class="problem-stat-label">average duration of a typical hangover</div>
+        </div>
+        <div class="problem-stat">
+          <div class="problem-stat-num">0</div>
+          <div class="problem-stat-label">effective treatments before Alpine Reset</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-graph-wrap">
+      <svg class="problem-graph" viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <filter id="glow-blue" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <filter id="glow-blue-soft" x="-30%" y="-30%" width="160%" height="160%">
+            <feGaussianBlur stdDeviation="7" result="blur"/>
+            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <linearGradient id="range-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3B9EFF" stop-opacity="0.13"/>
+            <stop offset="100%" stop-color="#3B9EFF" stop-opacity="0.02"/>
+          </linearGradient>
+          <linearGradient id="alpine-grad" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#1a6fd4"/>
+            <stop offset="100%" stop-color="#3B9EFF"/>
+          </linearGradient>
+          <linearGradient id="alpine-fill-grad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#3B9EFF" stop-opacity="0.12"/>
+            <stop offset="100%" stop-color="#3B9EFF" stop-opacity="0.00"/>
+          </linearGradient>
+          <clipPath id="graph-clip">
+            <rect x="76" y="44" width="484" height="330"/>
+          </clipPath>
+        </defs>
+
+        <!-- Background -->
+        <rect width="600" height="480" fill="#050d1a" rx="18"/>
+        <!-- Subtle inner glow top-left -->
+        <radialGradient id="bg-glow" cx="0%" cy="0%" r="70%">
+          <stop offset="0%" stop-color="#3B9EFF" stop-opacity="0.04"/>
+          <stop offset="100%" stop-color="#3B9EFF" stop-opacity="0"/>
+        </radialGradient>
+        <rect width="600" height="480" fill="url(#bg-glow)" rx="18"/>
+
+        <!-- Title + subtitle -->
+        <text x="300" y="28" font-family="'Barlow Condensed', sans-serif" font-size="15" font-weight="900"
+              letter-spacing="0.16em" fill="rgba(255,255,255,0.92)" text-anchor="middle">ALPINE RESET</text>
+        <text x="300" y="43" font-family="'Barlow Condensed', sans-serif" font-size="10" font-weight="500"
+              letter-spacing="0.12em" fill="rgba(255,255,255,0.28)" text-anchor="middle">RECOVERY CURVE COMPARISON</text>
+
+        <!-- Horizontal grid lines -->
+        <g stroke="rgba(59,158,255,0.08)" stroke-width="1">
+          <line x1="76" y1="90"  x2="560" y2="90"/>
+          <line x1="76" y1="148" x2="560" y2="148"/>
+          <line x1="76" y1="206" x2="560" y2="206"/>
+          <line x1="76" y1="264" x2="560" y2="264"/>
+          <line x1="76" y1="322" x2="560" y2="322"/>
+          <line x1="76" y1="374" x2="560" y2="374"/>
+        </g>
+        <!-- Vertical grid lines -->
+        <g stroke="rgba(59,158,255,0.055)" stroke-width="1">
+          <line x1="197" y1="44" x2="197" y2="374"/>
+          <line x1="318" y1="44" x2="318" y2="374"/>
+          <line x1="439" y1="44" x2="439" y2="374"/>
+          <line x1="560" y1="44" x2="560" y2="374"/>
+        </g>
+
+        <!-- Axes -->
+        <line x1="76" y1="44" x2="76" y2="374" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+        <line x1="76" y1="374" x2="560" y2="374" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+
+        <!-- Normal range band -->
+        <path d="M76,200 C130,197 195,202 260,215 C325,229 390,252 450,272 C495,285 530,296 560,307
+                 L560,324 C530,312 495,300 450,287 C390,266 325,244 260,231 C195,219 130,214 76,217 Z"
+              fill="url(#range-grad)" clip-path="url(#graph-clip)"/>
+        <!-- Normal range label -->
+        <text x="220" y="250" font-family="'Barlow Condensed', sans-serif" font-size="11" font-weight="700"
+              fill="rgba(255,255,255,0.30)" letter-spacing="0.15em">NORMAL RANGE</text>
+
+        <!-- WITHOUT Alpine Reset — dim white, declining -->
+        <path d="M76,198 C120,197 165,202 215,214 C270,228 335,254 400,283 C450,306 505,337 560,368"
+              fill="none" stroke="rgba(255,255,255,0.40)" stroke-width="2" stroke-linecap="round"
+              clip-path="url(#graph-clip)"/>
+
+        <!-- WITH Alpine Reset — area fill under curve -->
+        <path d="M76,368 C105,320 145,255 200,196 C258,133 330,90 405,67 C455,52 508,46 560,44
+                 L560,374 L76,374 Z"
+              fill="url(#alpine-fill-grad)" clip-path="url(#graph-clip)"/>
+
+        <!-- WITH Alpine Reset — bright blue line, glow -->
+        <path d="M76,368 C105,320 145,255 200,196 C258,133 330,90 405,67 C455,52 508,46 560,44"
+              fill="none" stroke="url(#alpine-grad)" stroke-width="3.5" stroke-linecap="round"
+              clip-path="url(#graph-clip)" filter="url(#glow-blue)"/>
+
+        <!-- Y-axis label -->
+        <text transform="translate(20,235) rotate(-90)" font-family="'Barlow Condensed', sans-serif"
+              font-size="10" font-weight="700" letter-spacing="0.16em"
+              fill="rgba(255,255,255,0.28)" text-anchor="middle">RECOVERY SCORE</text>
+
+        <!-- X-axis tick labels -->
+        <g font-family="'Barlow Condensed', sans-serif" font-size="10.5" fill="rgba(255,255,255,0.28)" letter-spacing="0.06em" text-anchor="middle">
+          <text x="76"  y="394">0H</text>
+          <text x="197" y="394">2H</text>
+          <text x="318" y="394">4H</text>
+          <text x="439" y="394">6H</text>
+          <text x="560" y="394">8H</text>
+        </g>
+
+        <!-- X-axis label -->
+        <text x="318" y="416" font-family="'Barlow Condensed', sans-serif" font-size="10" font-weight="700"
+              letter-spacing="0.16em" fill="rgba(255,255,255,0.25)" text-anchor="middle">TIME AFTER DRINKING</text>
+
+        <!-- Legend -->
+        <!-- Alpine Reset -->
+        <line x1="88" y1="446" x2="112" y2="446" stroke="#3B9EFF" stroke-width="2.5" stroke-linecap="round" filter="url(#glow-blue)"/>
+        <circle cx="100" cy="446" r="3" fill="#3B9EFF" filter="url(#glow-blue)"/>
+        <text x="120" y="450" font-family="'Barlow Condensed', sans-serif" font-size="11" font-weight="700"
+              letter-spacing="0.10em" fill="#3B9EFF">WITH ALPINE RESET</text>
+
+        <!-- Without -->
+        <line x1="290" y1="446" x2="314" y2="446" stroke="rgba(255,255,255,0.42)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="302" cy="446" r="2.5" fill="rgba(255,255,255,0.42)"/>
+        <text x="322" y="450" font-family="'Barlow Condensed', sans-serif" font-size="11" font-weight="600"
+              letter-spacing="0.10em" fill="rgba(255,255,255,0.42)">WITHOUT ALPINE RESET</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SOLUTION SECTION -->
+  <section class="solution-section">
+    <div class="solution-image">
+      <img src="AlpineMockup.png" alt="Alpine Reset Solution" style="height:auto;object-fit:contain;background:#0a0a0a;" />
+    </div>
+
+    <div class="solution-content">
+      <div class="section-label">The Solution</div>
+      <h2 class="section-title">The<br><em>Solution?</em></h2>
+      <p class="solution-intro">
+        Alpine Reset was engineered from the ground up to address every single mechanism driving your hangover. Not one or two ingredients. Eight — each targeting a different biological pathway.
+      </p>
+
+      <ul class="solution-checklist">
+        <li class="solution-check-item">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div>
+            <div class="check-title">Rapid Electrolyte Replenishment</div>
+            <div class="check-desc">3x more electrolytes than leading sports drinks. Feel hydrated from the inside out.</div>
+          </div>
+        </li>
+        <li class="solution-check-item">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div>
+            <div class="check-title">Accelerated Alcohol Clearance</div>
+            <div class="check-desc">DHM speeds up your body's ability to metabolize and clear acetaldehyde — the toxic byproduct of alcohol.</div>
+          </div>
+        </li>
+        <li class="solution-check-item">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div>
+            <div class="check-title">Liver Protection & Detox</div>
+            <div class="check-desc">Milk thistle and NAC shield your liver from oxidative damage and rebuild depleted glutathione.</div>
+          </div>
+        </li>
+        <li class="solution-check-item">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div>
+            <div class="check-title">Nutrient Restoration</div>
+            <div class="check-desc">B vitamins and Vitamin C restore what alcohol strips away, rebooting your energy and immune system.</div>
+          </div>
+        </li>
+        <li class="solution-check-item">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div>
+            <div class="check-title">Nausea & GI Relief</div>
+            <div class="check-desc">Clinically dosed ginger root calms your stomach and reduces nausea without masking the cause.</div>
+          </div>
+        </li>
+        <li class="solution-check-item">
+          <div class="check-icon">
+            <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          </div>
+          <div>
+            <div class="check-title">Mental Clarity Restored</div>
+            <div class="check-desc">L-Theanine clears the fog, reduces anxiety, and helps you actually function the morning after.</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="how">
+    <div class="how-header">
+      <div class="section-label">Ingredient Deep Dive</div>
+      <h2 class="section-title">How Does<br><em>Alpine Reset Work?</em></h2>
+      <p class="section-desc">Every ingredient in Alpine Reset is clinically dosed for real results — not marketing window dressing. Here's exactly how each one works.</p>
+    </div>
+
+    <div class="ingredient-list">
+      <div class="ingredient-row">
+        <div class="ingredient-num">01</div>
+        <div>
+          <div class="ingredient-info-name">Electrolyte Complex</div>
+          <div class="ingredient-info-dose">3x vs. leading sports drinks</div>
+          <p class="ingredient-info-text">
+            Alcohol is a diuretic — for every drink you have, your kidneys excrete significantly more water than you consume. This rapid fluid loss carries electrolytes with it: sodium, potassium, magnesium, and chloride. The resulting electrolyte imbalance is directly responsible for headaches, muscle cramps, and that bone-tired feeling. Alpine Reset's electrolyte complex delivers clinical doses of all four key electrolytes, rehydrating you at the cellular level.
+          </p>
+        </div>
+        <div class="ingredient-row-img-wrap"><img src="electrolytes.jpg" alt="Electrolytes" class="ingredient-row-img" /></div>
+      </div>
+
+      <div class="ingredient-row">
+        <div class="ingredient-num">02</div>
+        <div>
+          <div class="ingredient-info-name">Dihydromyricetin (DHM)</div>
+          <div class="ingredient-info-dose">400mg — clinically studied</div>
+          <p class="ingredient-info-text">
+            DHM is derived from Japanese raisin tree extract and is the most extensively researched anti-hangover compound in existence. Multiple randomized controlled trials show it significantly accelerates the clearance of acetaldehyde — the toxic metabolite of alcohol that causes most hangover symptoms. DHM also activates GABA receptors to reduce alcohol-related anxiety and supports the liver enzymes responsible for alcohol breakdown.
+          </p>
+        </div>
+        <div class="ingredient-row-img-wrap"><img src="DHM.webp" alt="DHM" class="ingredient-row-img" /></div>
+      </div>
+
+      <div class="ingredient-row">
+        <div class="ingredient-num">03</div>
+        <div>
+          <div class="ingredient-info-name">B Vitamin Complex (B1, B2, B3, B5, B6, B12)</div>
+          <div class="ingredient-info-dose">Full spectrum · bioavailable forms</div>
+          <p class="ingredient-info-text">
+            Alcohol aggressively depletes B vitamins — particularly B1 (thiamine), B6, and B12. These vitamins are essential cofactors in energy metabolism, neurological function, and red blood cell production. Severe B vitamin depletion is why hangovers make you feel mentally foggy, physically drained, and irritable. Alpine Reset uses the most bioavailable forms (methylcobalamin for B12, P-5-P for B6) for maximum absorption.
+          </p>
+        </div>
+        <div class="ingredient-row-img-wrap"><img src="vitamin-b.jpg" alt="B Vitamins" class="ingredient-row-img" /></div>
+      </div>
+
+      <div class="ingredient-row">
+        <div class="ingredient-num">04</div>
+        <div>
+          <div class="ingredient-info-name">Milk Thistle Extract (80% Silymarin)</div>
+          <div class="ingredient-info-dose">300mg · standardized extract</div>
+          <p class="ingredient-info-text">
+            Silymarin — the active compound in milk thistle — is one of the most well-documented hepatoprotective (liver-protecting) agents in natural medicine. It works by stabilizing cell membranes in liver cells, preventing toxin penetration, and stimulating the regeneration of damaged liver tissue. Our extract is standardized to 80% silymarin for consistent, reliable potency.
+          </p>
+        </div>
+        <div class="ingredient-row-img-wrap"><img src="milk-thistle.jpg" alt="Milk Thistle" class="ingredient-row-img" /></div>
+      </div>
+
+      <div class="ingredient-row">
+        <div class="ingredient-num">05</div>
+        <div>
+          <div class="ingredient-info-name">N-Acetyl Cysteine (NAC)</div>
+          <div class="ingredient-info-dose">600mg · pharmaceutical grade</div>
+          <p class="ingredient-info-text">
+            NAC is a precursor to glutathione — the body's master antioxidant. During alcohol metabolism, your liver burns through glutathione at an alarming rate to neutralize acetaldehyde. When glutathione is depleted, oxidative damage runs unchecked. NAC rapidly replenishes glutathione stores, protecting liver cells and accelerating the detoxification of alcohol byproducts.
+          </p>
+        </div>
+        <div class="ingredient-row-img-wrap"><img src="NAC.jpg" alt="NAC" class="ingredient-row-img" /></div>
+      </div>
+
+      <div class="ingredient-row">
+        <div class="ingredient-num">06</div>
+        <div>
+          <div class="ingredient-info-name">Vitamin C (Ascorbic Acid)</div>
+          <div class="ingredient-info-dose">1000mg · buffered form</div>
+          <p class="ingredient-info-text">
+            Vitamin C is a powerful antioxidant that works in tandem with glutathione to neutralize free radicals generated during alcohol metabolism. It also regenerates oxidized vitamin E, creating a synergistic antioxidant cascade. Beyond its antioxidant role, Vitamin C supports immune function (which alcohol suppresses) and aids in collagen synthesis, supporting tissue repair.
+          </p>
+        </div>
+        <div class="ingredient-row-img-wrap"><img src="zinc.jpeg" alt="Vitamin C" class="ingredient-row-img" /></div>
+      </div>
+
+      <div class="ingredient-row">
+        <div class="ingredient-num">07</div>
+        <div>
+          <div class="ingredient-info-name">Ginger Root Extract</div>
+          <div class="ingredient-info-dose">500mg · 5% gingerols</div>
+          <p class="ingredient-info-text">
+            Ginger is one of the most well-studied natural remedies for nausea and GI distress. Its active compounds — gingerols and shogaols — accelerate gastric emptying, reducing the time irritants sit in your stomach, and have direct anti-nausea effects on the gut-brain axis. Multiple clinical trials confirm its efficacy for nausea relief. Alpine Reset uses a 5% gingerol standardized extract for consistent, reliable potency.
+          </p>
+        </div>
+        <div class="ingredient-row-img-wrap"><img src="magnesium.webp" alt="Ginger Root" class="ingredient-row-img" /></div>
+      </div>
+
+      <div class="ingredient-row">
+        <div class="ingredient-num">08</div>
+        <div>
+          <div class="ingredient-info-name">L-Theanine</div>
+          <div class="ingredient-info-dose">200mg · pure form</div>
+          <p class="ingredient-info-text">
+            L-Theanine is an amino acid found in green tea that promotes relaxed alertness by increasing alpha brain waves. Alcohol disrupts GABA and glutamate signaling, causing rebound anxiety and mental fog the morning after. L-Theanine helps rebalance these neurotransmitter systems, promoting calm focus without sedation — so you can actually think clearly and feel like a functioning human being again.
+          </p>
+        </div>
+        <div class="ingredient-row-img-wrap"><img src="L-Theanine.avif" alt="L-Theanine" class="ingredient-row-img" /></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIFESTYLE SECTION -->
+  <section class="lifestyle-section">
+    <!-- Mountain gradient fallback behind the image -->
+    <div style="position:absolute;inset:0;background:linear-gradient(160deg,#0A1628 0%,#0a1e38 40%,#071428 100%);z-index:0;"></div>
+    <svg style="position:absolute;bottom:0;left:0;right:0;width:100%;height:100%;pointer-events:none;opacity:0.08;z-index:1;" viewBox="0 0 1600 560" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="0,560 280,200 500,380 760,80 1040,300 1280,60 1500,250 1600,160 1600,560" fill="#3B9EFF"/>
+      <polygon points="0,560 200,300 420,440 700,160 980,360 1220,120 1420,320 1600,220 1600,560" fill="#2980e4" opacity="0.5"/>
+    </svg>
+    <img src="https://placehold.co/1600x560/060D1A/0d1e35?text=." alt="Alpine Reset Lifestyle" class="lifestyle-bg" style="opacity:0.3;" />
+    <div class="lifestyle-overlay"></div>
+    <div class="lifestyle-content">
+      <h2 class="lifestyle-title">
+        Wake Up<br>
+        <span>Feeling Human.</span>
+      </h2>
+      <p class="lifestyle-sub">
+        Stop writing off your mornings. Alpine Reset was built so you can have the night without paying for it the next day.
+      </p>
+    </div>
+  </section>
+
+  <!-- BETTER WHEN COMBINED -->
+  <section class="combine-section">
+    <div class="combine-header">
+      <div class="section-label">Stack It</div>
+      <h2 class="section-title">Better Results<br>When <em>Combined With</em></h2>
+    </div>
+
+    <div class="combine-grid">
+      <a href="#" class="combine-card">
+        <div class="combine-card-photo"><img src="hydrate.png" alt="Alpine Hydrate" /></div>
+        <div class="combine-card-body">
+          <div class="combine-card-name">Alpine Hydrate</div>
+          <div class="combine-card-desc">Advanced hydration blend with coconut water, trace minerals, and electrolytes for all-day performance.</div>
+        </div>
+      </a>
+      <a href="#" class="combine-card">
+        <div class="combine-card-photo"><img src="restore.png" alt="Alpine Restore" /></div>
+        <div class="combine-card-body">
+          <div class="combine-card-name">Alpine Restore</div>
+          <div class="combine-card-desc">Evening recovery formula with magnesium glycinate, ashwagandha, and melatonin for deeper, more restorative sleep.</div>
+        </div>
+      </a>
+      <a href="#" class="combine-card">
+        <div class="combine-card-photo"><img src="defend.png" alt="Alpine Defend" /></div>
+        <div class="combine-card-body">
+          <div class="combine-card-name">Alpine Defend</div>
+          <div class="combine-card-desc">Immune and gut support with elderberry, zinc, vitamin D3, and a prebiotic blend for total body resilience.</div>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section">
+    <div class="section-label">Got Questions</div>
+    <h2 class="section-title">Frequently Asked<br><em>Questions</em></h2>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleFaq(this)">
+          <span>When should I take Alpine Reset?</span>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          Alpine Reset works best when taken before bed after drinking, or first thing in the morning. Mix one scoop with 12–16oz of water. For nights out, take it before sleep so ingredients can work while you rest. For morning-after use, take immediately upon waking.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleFaq(this)">
+          <span>How many servings are in a container?</span>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          Each container of Alpine Reset contains 15 servings (300g total). One serving is one rounded scoop (approximately 20g). Each container is designed to last you through a full month of typical use.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleFaq(this)">
+          <span>Is Alpine Reset safe to take regularly?</span>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          Yes. All ingredients in Alpine Reset are GRAS-recognized and used at safe, well-studied doses. The formula is non-habit-forming and can be taken as needed. If you have any underlying health conditions or take medications, consult your physician before use.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleFaq(this)">
+          <span>What flavors does Alpine Reset come in?</span>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          Alpine Reset currently comes in Peach Mango — naturally flavored with no artificial sweeteners, colors, or flavors. It mixes cleanly with just water and tastes great even without ice.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleFaq(this)">
+          <span>Does it actually work? What's the science?</span>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          Yes. Every ingredient in Alpine Reset is backed by peer-reviewed clinical research at the doses we use. DHM alone has 15+ published studies supporting its efficacy for hangover reduction and alcohol metabolism. The electrolyte complex, B vitamins, NAC, and milk thistle all have extensive bodies of evidence behind them. We share all our research citations on our website.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleFaq(this)">
+          <span>What is your return policy?</span>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          We offer a 30-day money-back guarantee on all orders. If you're not completely satisfied with Alpine Reset for any reason, contact our support team and we'll issue a full refund — no questions asked, no hassle.
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleFaq(this)">
+          <span>Is Alpine Reset gluten-free and vegan?</span>
+          <div class="accordion-icon">+</div>
+        </button>
+        <div class="accordion-body">
+          Yes. Alpine Reset is gluten-free, vegan, non-GMO, soy-free, and dairy-free. It is manufactured in a cGMP-certified facility in the USA and third-party tested for purity and potency.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <img src="alpine logo.png" alt="Alpine Nutrition" class="footer-logo" />
+        <p class="footer-tagline">
+          Science-backed nutrition to help you recover faster, perform better, and live without limits. Made in the USA.
+        </p>
+      </div>
+      <div>
+        <div class="footer-col-title">Shop</div>
+        <ul class="footer-links">
+          <li><a href="#">Alpine Reset</a></li>
+          <li><a href="#">Alpine Hydrate</a></li>
+          <li><a href="#">Alpine Restore</a></li>
+          <li><a href="#">Alpine Defend</a></li>
+          <li><a href="#">Bundles</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Company</div>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Our Science</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Careers</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer-col-title">Support</div>
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">Shipping</a></li>
+          <li><a href="#">Returns</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>&copy; 2025 Alpine Nutrition. All rights reserved.</span>
+      <span>Made in the USA &middot; cGMP Certified</span>
+    </div>
+
+    <div class="footer-wordmark">ALPINE</div>
+  </footer>
+
+  <script>
+    function toggleFaq(btn) {
+      const body = btn.nextElementSibling;
+      const icon = btn.querySelector('.accordion-icon');
+      const isOpen = btn.classList.contains('open');
+
+      // Close all
+      document.querySelectorAll('.accordion-btn').forEach(b => {
+        b.classList.remove('open');
+        b.querySelector('.accordion-icon').textContent = '+';
+        b.nextElementSibling.classList.remove('open');
+      });
+
+      // Open clicked if it was closed
+      if (!isOpen) {
+        btn.classList.add('open');
+        icon.textContent = '−';
+        body.classList.add('open');
+      }
+    }
+  </script>
+</body>
+</html>
