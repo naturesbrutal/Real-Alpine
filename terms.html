@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service — Alpine Nutrition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #3B9EFF;
+      --bg: #0A1628;
+      --surface: #0e1e36;
+      --border: rgba(255,255,255,0.07);
+      --gray-1: #8FA8C0;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background: var(--bg);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,22,40,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(59,158,255,0.1);
+      padding: 0 6%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo { width: 120px; height: auto; filter: invert(1); }
+
+    .nav-back {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: #fff; }
+
+    /* ── HERO BAR ── */
+    .page-hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 6% 48px;
+    }
+
+    .page-hero-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 0.97;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .page-hero-meta {
+      font-size: 13px;
+      color: var(--gray-1);
+    }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 6% 100px;
+    }
+
+    /* ── TABLE OF CONTENTS ── */
+    .toc {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--blue);
+      padding: 28px 32px;
+      margin-bottom: 64px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .toc-title {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 16px;
+    }
+
+    .toc ol {
+      list-style: decimal;
+      padding-left: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 40px;
+    }
+
+    .toc li { font-size: 14px; color: var(--gray-1); }
+
+    .toc a {
+      color: var(--gray-1);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .toc a:hover { color: var(--blue); }
+
+    /* ── SECTIONS ── */
+    .tos-section {
+      margin-bottom: 56px;
+      scroll-margin-top: 80px;
+    }
+
+    .tos-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.8vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+
+    .tos-section h2 .num {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .tos-section p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 16px;
+    }
+
+    .tos-section p:last-child { margin-bottom: 0; }
+
+    /* All-caps legal blocks */
+    .legal-caps {
+      font-size: 13px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+
+    .tos-section a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .tos-section a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 32px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .page-footer-copy {
+      font-size: 13px;
+      color: var(--gray-1);
+    }
+
+    .page-footer a {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .toc ol { grid-template-columns: 1fr; }
+      .page-hero { padding: 40px 5% 32px; }
+      .page-wrap { padding: 48px 5% 72px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <img src="alpine logo.png" alt="Alpine Nutrition" class="nav-logo" />
+    <a href="index.html" class="nav-back">← Back to Site</a>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-label">Legal</div>
+    <h1>Terms of Service</h1>
+    <div class="page-hero-meta">Last Updated: April 19, 2026 &nbsp;·&nbsp; Alpine Nutrition LLC</div>
+  </div>
+
+  <div class="page-wrap">
+
+    <nav class="toc" aria-label="Table of contents">
+      <div class="toc-title">Contents</div>
+      <ol>
+        <li><a href="#acceptance">Acceptance of Terms</a></li>
+        <li><a href="#registration">User Registration</a></li>
+        <li><a href="#access">Right to Access &amp; Content</a></li>
+        <li><a href="#trademarks">Trademarks</a></li>
+        <li><a href="#privacy">Privacy Policy</a></li>
+        <li><a href="#user-content">User Content</a></li>
+        <li><a href="#rights">Rights in User Content</a></li>
+        <li><a href="#feedback">Feedback</a></li>
+        <li><a href="#third-party">Third-Party Sites</a></li>
+        <li><a href="#indemnification">Indemnification</a></li>
+        <li><a href="#disclaimers">General Disclaimers</a></li>
+        <li><a href="#liability">Limitation of Liability</a></li>
+        <li><a href="#orders">Order Process</a></li>
+        <li><a href="#arbitration">Arbitration</a></li>
+        <li><a href="#class-action">Class Action Waiver</a></li>
+        <li><a href="#termination">Termination</a></li>
+        <li><a href="#governing-law">Governing Law</a></li>
+        <li><a href="#notice">Notice</a></li>
+        <li><a href="#severability">Severability</a></li>
+        <li><a href="#copyright">Copyright Infringement</a></li>
+        <li><a href="#misc">Miscellaneous</a></li>
+      </ol>
+    </nav>
+
+    <section class="tos-section" id="acceptance">
+      <h2><span class="num">01</span> Acceptance of Terms</h2>
+      <p>These Website Terms of Use (these "Terms") govern your access to websites and related services operated by or on behalf of Alpine ("Alpine," "we," or "us"). These Terms are important and affect your legal rights, so please read them carefully. Note that Section 14 of these Terms contains a mandatory arbitration provision that requires the use of arbitration on an individual basis and limits the remedies available to you in the event of certain disputes.</p>
+      <p>By accessing or using alpinenu.com and our various related websites and services (collectively, the "Alpine Services"), you agree to be bound by these Terms and all of the Terms incorporated herein by reference.</p>
+      <p>You must be 18 years of age or older and reside in the United States or any of its territories to use the Alpine Services. By accepting these Terms, you represent that you have the legal authority to do so, and that, if you have accepted these Terms on behalf of any person or entity, you represent that you have legal authority to do so and that such person or entity agrees to be responsible to us if you or such person or entity violates these terms. If you do not agree to every provision of these Terms, you may not, and we do not authorize you to, access or use the Alpine Services or any features provided therein.</p>
+      <p>By accessing or using the Alpine Services, you represent and warrant that you have not been previously suspended or removed from the Alpine Services or engaged in any activity that could result in suspension or removal from the Alpine Services.</p>
+      <p>You should not construe Alpine's publication of any content found on the Alpine Services as an endorsement by Alpine of the views expressed therein, or any warranty or guarantee of any strategy, recommendation, treatment, action, or application of medication or preparation made by the author of such content.</p>
+      <p>We may revise these Terms at any time for any reason and may provide you notice of these changes by any reasonable means, including through the Alpine Services. You can determine when we last updated these Terms by referring to the "Last Updated" legend at the top of these Terms. Except to the extent that your express consent to any revised Terms is required under applicable law, by continuing to access, browse, or use the Alpine Services, you agree to any revised Terms. We strongly recommend that you periodically visit this page to review these Terms.</p>
+    </section>
+
+    <section class="tos-section" id="registration">
+      <h2><span class="num">02</span> User Registration</h2>
+      <p>In order to access and use certain areas or features of the Alpine Services, you may need to provide certain information and/or answer certain questions. Each registration is for a single user only.</p>
+      <p>You agree to (a) provide accurate, current and complete information, (b) maintain and promptly update, as necessary, your information, (c) be responsible for the acts or omissions of any third party who has authority to access or use the Alpine Services on your behalf, and (d) immediately notify us if you discover or otherwise suspect any security breaches related to the Alpine Services. If you provide information that is untrue, inaccurate, not current or incomplete, we may suspend and/or terminate your current or future use of the Alpine Services.</p>
+      <p>By providing information and/or answering questions, you also consent to receive electronic communications from Alpine (e.g., via email or by posting notices to the Alpine Services). You should maintain copies of electronic communications from us by printing a paper copy or saving an electronic copy.</p>
+      <p>We may also send you promotional communications via email, including, but not limited to, newsletters, special offers, surveys and other news and information we think will be of interest to you. You may opt out of receiving these promotional emails at any time by following the unsubscribe instructions provided therein.</p>
+      <p>Alpine has a SMS Messaging Program ("SMS Program") for promotional marketing to customers who sign up to it. Message frequency of this SMS Program varies and Message and data rates may apply. At any time after signing up to the SMS Program a user or customer can Reply STOP to any message to opt-out.</p>
+    </section>
+
+    <section class="tos-section" id="access">
+      <h2><span class="num">03</span> Right to Access and Use the Alpine Services and Content</h2>
+      <p>Unless otherwise indicated in writing by us, the Alpine Services and all content and other materials contained therein, including, without limitation, any Alpine service mark or logo and all designs, text, graphics, pictures, information, data, software, other files and the selection and arrangement thereof (collectively, "Content") are the property of Alpine or our licensors or users, as applicable, and are protected by U.S. and international copyright and other laws.</p>
+      <p>Subject to these Terms, you are hereby granted a limited personal, revocable, non-exclusive, non-transferable, non-sublicensable right to access, view and make personal, non-commercial use of the Alpine Services and Content. All rights not expressly granted herein are reserved.</p>
+      <p>You do not have any right to, and you shall not, directly or indirectly: (a) sell, resell or use commercially the Alpine Services or Content; (b) distribute, publicly perform or publicly display the Alpine Services or any Content; (c) modify or otherwise make any derivative uses of the Alpine Services or Content, or any portion thereof; (d) use any data mining, robots or similar data gathering or extraction methods; (e) download (other than page caching) any portion of the Alpine Services or Content, except as expressly permitted by us; (f) use the Alpine Services to stalk, threaten, or otherwise violate the rights of others; (g) interfere with the Alpine Services or servers or networks used in connection with the Alpine Services; or (h) use the Alpine Services or Content other than for their intended purposes.</p>
+      <p>Any use of the Alpine Services or Content other than as specifically authorized herein, without our prior written permission, is strictly prohibited and will terminate the right of access and use granted herein.</p>
+      <p>We reserve the right in our sole discretion to modify, suspend or discontinue, temporarily or permanently, the Alpine Services (or any features or parts thereof) at any time.</p>
+    </section>
+
+    <section class="tos-section" id="trademarks">
+      <h2><span class="num">04</span> Trademarks</h2>
+      <p>The Alpine logo, and any other Alpine product or service names, trademarks, logos, or other indicia that may appear on the Alpine Services ("Marks") are the property of Alpine or its subsidiaries, affiliates, or third parties, and may not be copied, imitated or used, in whole or in part, without our prior written permission. Nothing contained in these Terms and/or the Alpine Services shall be construed as granting, by implication or otherwise, any license or right to use any such Marks without the prior written permission of Alpine or such third party that may own such Marks.</p>
+    </section>
+
+    <section class="tos-section" id="privacy">
+      <h2><span class="num">05</span> Legal Requirements; Privacy Policy</h2>
+      <p>Our Privacy Policy describes how we handle the personal information you provide to us when you use the Alpine Services. For an explanation of our privacy practices, please visit our <a href="https://alpinenu.com/pages/privacy-policy" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+    </section>
+
+    <section class="tos-section" id="user-content">
+      <h2><span class="num">06</span> User Content</h2>
+      <p>You are solely responsible and liable for all data, information and other materials ("User Content") that you submit, upload, post, e-mail or otherwise transmit ("Transmit") in connection with the Alpine Services. In addition, we have no control over, and shall have no liability for, any damages resulting from the use or misuse by any third party of information made public through the Alpine Services.</p>
+      <p class="legal-caps">IF YOU CHOOSE TO SUBMIT TO US, OR OTHERWISE MAKE ANY USER CONTENT PUBLICLY AVAILABLE, YOU DO SO AT YOUR OWN RISK AND WE SHALL HAVE NO LIABILITY THEREFOR.</p>
+      <p>You agree that you will not, and will not permit anyone else to, directly or indirectly: (a) Transmit any User Content that is unlawful, harmful, threatening, abusive, hateful, obscene, harassing, tortious, defamatory, libelous, slanderous, pornographic, profane, vulgar, offensive, lewd, invasive of another's privacy, or racially, ethnically, or otherwise objectionable; (b) Transmit any User Content that you do not have the right to Transmit, that infringes any intellectual property right, constitutes unsolicited advertising or spam, or that contains any malicious software or code; or (c) forge headers or otherwise manipulate identifiers in order to disguise any User Content Transmitted through the Alpine Services.</p>
+      <p>Although we have no obligation to screen, edit or monitor User Content, we reserve the right, and have absolute discretion, to remove, screen or edit User Content posted or stored on the Alpine Services at any time and for any reason.</p>
+    </section>
+
+    <section class="tos-section" id="rights">
+      <h2><span class="num">07</span> Rights in User Content</h2>
+      <p>We do not claim any ownership interest in User Content. However, by uploading, posting or submitting User Content to the Alpine Services or to our pages or feeds on third-party social media platforms, you hereby grant Alpine a nonexclusive, royalty-free, worldwide, perpetual, irrevocable and fully sublicensable right and license to use, reproduce, modify, adapt, publish, translate, create derivative works from, distribute, perform, and publicly display your User Content, in whole or in part, in any manner or media and for any purpose whatsoever at our sole discretion. Alpine will only share personal information that you provide in accordance with our Privacy Policy.</p>
+      <p>You agree that Alpine may disclose or use any User Content for any purposes permitted under applicable law, including enforcing these Terms, complying with any laws or regulations, responding to claims that any User Content violates the rights of third parties, or protecting the rights or property of Alpine, its customers, or the public.</p>
+    </section>
+
+    <section class="tos-section" id="feedback">
+      <h2><span class="num">08</span> Feedback</h2>
+      <p>Separate and apart from User Content, you can submit questions, comments, suggestions, ideas, original or creative materials, or other information about Alpine or the Alpine Services (collectively, "Feedback"). Feedback shall become the sole property of Alpine. Alpine shall own exclusive rights, including all intellectual property rights, in and to Feedback and shall be entitled to the unrestricted use and dissemination of Feedback for any purpose, commercial or otherwise, without acknowledgment or compensation to you.</p>
+    </section>
+
+    <section class="tos-section" id="third-party">
+      <h2><span class="num">09</span> Third-Party Sites</h2>
+      <p>We have not reviewed all of the websites linked to the Alpine Services and are not responsible for the content of any third-party pages, any other websites linked to the Alpine Services, or any products or services offered by third parties. Nothing in the Alpine Services, including any links to other websites, should be construed as an endorsement by Alpine of any products, services or information of any other persons or companies. Your choice to access a link to any other website is at your own risk.</p>
+      <p>Any links to third-party websites are provided as a convenience to you and are neither owned nor operated by Alpine. We have no control over these linked websites and make no representations or warranties with respect to these linked websites or third-party products or services.</p>
+    </section>
+
+    <section class="tos-section" id="indemnification">
+      <h2><span class="num">10</span> Indemnification</h2>
+      <p>You shall indemnify, hold harmless, and, at Alpine's option, defend Alpine and its affiliates and subsidiaries from and against any and all losses, damages, liabilities, costs (including reasonable attorneys' fees) incurred by Alpine resulting from any third-party claim, suit, action or proceeding relating to or arising from your use of the Alpine Services, any User Content, any Feedback you provide, any violation of these Terms by you, or any other act or omission by you, including your violation of any rights of another. You further agree that Alpine shall have control of the defense or settlement of any third-party claims unless Alpine exercises its option to require you to defend Alpine.</p>
+    </section>
+
+    <section class="tos-section" id="disclaimers">
+      <h2><span class="num">11</span> General Disclaimers</h2>
+      <p>Alpine offers dietary supplements that are not intended to diagnose, treat, cure, or prevent any disease. Nothing on the Alpine Services constitutes medical advice, diagnosis, or treatment. Statements made on the Alpine Services have not been evaluated by the Food and Drug Administration. You should consult with a qualified healthcare professional before using any dietary supplement, especially if you are pregnant, nursing, have a medical condition, or are taking any medications. Individual results may vary.</p>
+      <p class="legal-caps">THE ALPINE SERVICES AND THE CONTENT ARE PROVIDED ON AN "AS IS", "AS AVAILABLE" AND "WITH ALL FAULTS" BASIS. TO THE FULLEST EXTENT PERMISSIBLE BY LAW, ALPINE DOES NOT MAKE ANY REPRESENTATIONS OR WARRANTIES OR ENDORSEMENTS OF ANY KIND WHATSOEVER, EXPRESS OR IMPLIED, AS TO: (A) THE ALPINE SERVICES; (B) CONTENT; (C) USER CONTENT; OR (D) SECURITY ASSOCIATED WITH THE TRANSMISSION OF INFORMATION TO OR FROM THE ALPINE SERVICES. ALPINE HEREBY DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, THAT ANY RESULTS WILL BE ACHIEVED, NON-INFRINGEMENT, TITLE, CUSTOM, TRADE, QUIET ENJOYMENT, SYSTEM INTEGRATION AND FREEDOM FROM COMPUTER VIRUS.</p>
+      <p class="legal-caps">ALPINE DOES NOT REPRESENT OR WARRANT THAT THE ALPINE SERVICES WILL BE ERROR-FREE OR UNINTERRUPTED; THAT DEFECTS WILL BE CORRECTED; OR THAT THE ALPINE SERVICES OR THE SERVERS THAT MAKE THE ALPINE SERVICES AVAILABLE ARE FREE FROM ANY HARMFUL COMPONENTS, INCLUDING, WITHOUT LIMITATION, VIRUSES. YOU ACKNOWLEDGE THAT YOUR USE OF THE ALPINE SERVICES IS AT YOUR SOLE RISK.</p>
+    </section>
+
+    <section class="tos-section" id="liability">
+      <h2><span class="num">12</span> Limitation of Liability; Waiver</h2>
+      <p class="legal-caps">TO THE FULLEST EXTENT PERMITTED BY LAW, IN NO EVENT SHALL ALPINE BE LIABLE FOR ANY INDIRECT, SPECIAL, INCIDENTAL, OR CONSEQUENTIAL DAMAGES OF ANY KIND (INCLUDING, BUT NOT LIMITED TO, LOSS OF REVENUE, INCOME OR PROFITS, LOSS OF USE OR DATA, LOSS OR DIMINUTION IN VALUE OF ASSETS OR SECURITIES, OR DAMAGES FOR BUSINESS INTERRUPTION) ARISING OUT OF OR IN ANY WAY RELATED TO THE ACCESS TO OR USE OF THE ALPINE SERVICES, OR OTHERWISE RELATED TO THESE TERMS, REGARDLESS OF THE FORM OF ACTION, WHETHER BASED IN CONTRACT, TORT OR ANY OTHER LEGAL OR EQUITABLE THEORY, EVEN IF ALPINE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p>
+      <p class="legal-caps">TO THE FULLEST EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE MAXIMUM AGGREGATE LIABILITY OF ALPINE ARISING OUT OF OR IN ANY WAY RELATED TO THE ALPINE SERVICES EXCEED ONE HUNDRED DOLLARS ($100).</p>
+      <p class="legal-caps">IF YOU ARE A CALIFORNIA RESIDENT, YOU HEREBY WAIVE YOUR RIGHTS UNDER CALIFORNIA CIVIL CODE 1542, WHICH STATES "A GENERAL RELEASE DOES NOT EXTEND TO CLAIMS THAT THE CREDITOR OR RELEASING PARTY DOES NOT KNOW OR SUSPECT TO EXIST IN HIS OR HER FAVOR AT THE TIME OF EXECUTING THE RELEASE AND THAT, IF KNOWN BY HIM OR HER, WOULD HAVE MATERIALLY AFFECTED HIS OR HER SETTLEMENT WITH THE DEBTOR OR RELEASED PARTY."</p>
+    </section>
+
+    <section class="tos-section" id="orders">
+      <h2><span class="num">13</span> Order Process</h2>
+      <p>You will have the chance to review and confirm your order, including delivery address and payment method. After placing your order, you'll receive an email confirmation from Alpine, which confirms our acceptance of your order. We will arrange for shipment of the products, and you will be responsible for all shipping and handling charges as specified during the checkout process. Ownership and risk of loss transfer to you when the shipping carrier receives the products from Alpine.</p>
+    </section>
+
+    <section class="tos-section" id="arbitration">
+      <h2><span class="num">14</span> Arbitration</h2>
+      <p class="legal-caps">PLEASE READ THE FOLLOWING SECTION CAREFULLY BECAUSE IT REQUIRES YOU TO ARBITRATE CERTAIN DISPUTES AND CLAIMS WITH ALPINE AND LIMITS THE MANNER IN WHICH YOU CAN SEEK RELIEF FROM US.</p>
+      <p class="legal-caps">YOU AND ALPINE AGREE THAT ANY DISPUTE, CLAIM OR CONTROVERSY ARISING OUT OF OR RELATING IN ANY WAY TO THESE TERMS OR THE ALPINE SERVICES SHALL BE FINALLY DECIDED BY BINDING ARBITRATION UNDER THE RULES OF THE AMERICAN ARBITRATION ASSOCIATION GOVERNING CONSUMER DISPUTES.</p>
+      <p>Arbitration uses a single, neutral arbitrator to decide a dispute (instead of a judge or jury); arbitration allows for more limited discovery than in a court case; and the arbitration process and result is subject to very limited review by courts. In an arbitration you have the right, at your expense, to be represented by an attorney of your choosing. Arbitrators can award the same damages and relief under these Terms that a court can award under these Terms.</p>
+      <p>You and Alpine agree that any in-person arbitral hearing would occur in the United States in the same county and state as your billing address. Alpine further agrees that your filing fee for an arbitration will be capped at the amount set by the American Arbitration Association. You agree that, by agreeing to these Terms, the U.S. Federal Arbitration Act governs the interpretation and enforcement of this provision, and that you and Alpine are each waiving the right to a trial by jury and/or to participate in a class action.</p>
+      <p>This arbitration provision shall survive termination of these Terms and the termination of your use of the Alpine Services. Unless both you and Alpine agree otherwise, the arbitrator may not join or consolidate more than one person's claims with your claims and may not otherwise preside over any form of a representative or class proceeding. If this specific provision is found to be unenforceable, then the entirety of this arbitration provision shall be null and void.</p>
+    </section>
+
+    <section class="tos-section" id="class-action">
+      <h2><span class="num">15</span> Class Action Waiver</h2>
+      <p class="legal-caps">REGARDLESS OF THE FORUM, YOU AND ALPINE AGREE THAT EACH MAY BRING CLAIMS AGAINST THE OTHER ONLY IN YOUR OR ITS INDIVIDUAL CAPACITY, AND NOT AS A PLAINTIFF OR CLASS MEMBER IN ANY PURPORTED CLASS OR REPRESENTATIVE PROCEEDING.</p>
+    </section>
+
+    <section class="tos-section" id="termination">
+      <h2><span class="num">16</span> Termination</h2>
+      <p>Notwithstanding anything contained in these Terms, we reserve the right, without notice and in our sole discretion, to terminate your right to access or use the Alpine Services at any time and for any or no reason, and you acknowledge and agree that in such event we shall have no liability or obligation to you.</p>
+    </section>
+
+    <section class="tos-section" id="governing-law">
+      <h2><span class="num">17</span> Governing Law and Jurisdiction</h2>
+      <p>Alpine operates the Alpine Services from Texas, U.S.A. These Terms and the transactions they contemplate, including without limitation their interpretation, construction, performance and enforcement, shall be governed by the laws of the State of Texas, U.S.A., including its statutes of limitations, but without reference to conflict or choice of law provisions. The International Convention on the Sale of Goods and other international treaties that are not mandatory with respect to contracts made and performed entirely in Texas shall not apply.</p>
+    </section>
+
+    <section class="tos-section" id="notice">
+      <h2><span class="num">18</span> Notice</h2>
+      <p>All notices, demands, or consents given by you under these Terms will be in writing and will be deemed given when delivered to Alpine at: <a href="mailto:Support@alpinenu.com">Support@alpinenu.com</a>. Any notices to you may be made via either e-mail or postal mail to the address in Alpine's records or via posting on the Alpine Services.</p>
+      <p>Persons with disabilities who need assistance accessing these Terms may contact us as provided for in this Section, and depending on your individual needs, we will grant reasonable requests to furnish these Terms in an alternative format.</p>
+    </section>
+
+    <section class="tos-section" id="severability">
+      <h2><span class="num">19</span> Severability</h2>
+      <p>If any term, clause or provision of these Terms is held invalid or unenforceable, then that term, clause or provision will be severable from these Terms and will not affect the validity or enforceability of any remaining part of that term, clause or provision, or any other term, clause or provision of these Terms.</p>
+    </section>
+
+    <section class="tos-section" id="copyright">
+      <h2><span class="num">20</span> Procedure for Making Claims of Copyright Infringement</h2>
+      <p>If you believe in good faith that any of the content on the Alpine Services infringes your copyright, please provide our copyright agent the following written information: (a) an electronic or physical signature of the person authorized to act on behalf of the owner of the copyright interest; (b) a description of the copyrighted work that you claim has been infringed; (c) a description of where the material that you claim is infringing is located on the Alpine Services; (d) your address, telephone number and email address; (e) a statement by you that you have a good faith belief that the disputed use is not authorized by the copyright owner, its agent, or the law; and (f) a statement by you, made under penalty of perjury, that the information in the notice is accurate and that you are the copyright owner, or are authorized to act on behalf of the owner of an exclusive right that is allegedly infringed.</p>
+      <p>Alpine's copyright agent for notice of claims of copyright infringement can be reached as follows:<br>
+      Alpine Nutrition LLC<br>
+      Email: <a href="mailto:support@alpinenu.com">support@alpinenu.com</a></p>
+    </section>
+
+    <section class="tos-section" id="misc">
+      <h2><span class="num">21</span> Miscellaneous</h2>
+      <p>The Alpine Services are hosted in the United States of America. If you are located outside of the United States of America and you contact us, please be advised that any information you provide to us will be transferred to the United States of America and that by submitting information, you explicitly authorize such transfer.</p>
+      <p>These Terms constitute the entire agreement between you and Alpine relating to your access to and use of the Alpine Services. These Terms, and any rights granted hereunder, may not be transferred or assigned by you without the prior written consent of Alpine. No waiver of any provision of these Terms will constitute a waiver of such provision in any prior, concurrent or subsequent circumstance, and Alpine's failure to assert any right or provision under these Terms shall not constitute a waiver of such right or provision. Except as otherwise provided herein, these Terms are intended solely for the benefit of the parties and are not intended to confer third-party beneficiary rights upon any other person or entity.</p>
+    </section>
+
+  </div>
+
+  <footer class="page-footer">
+    <span class="page-footer-copy">&copy; 2026 Alpine Nutrition LLC. All rights reserved.</span>
+    <a href="index.html">← Back to Alpine Reset</a>
+  </footer>
+
+</body>
+</html>
