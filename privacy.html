@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Alpine Nutrition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #3B9EFF;
+      --bg: #0A1628;
+      --surface: #0e1e36;
+      --border: rgba(255,255,255,0.07);
+      --gray-1: #8FA8C0;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background: var(--bg);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,22,40,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(59,158,255,0.1);
+      padding: 0 6%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo { width: 120px; height: auto; filter: invert(1); }
+
+    .nav-back {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: #fff; }
+
+    /* ── HERO BAR ── */
+    .page-hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 6% 48px;
+    }
+
+    .page-hero-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 0.97;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .page-hero-meta {
+      font-size: 13px;
+      color: var(--gray-1);
+    }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 6% 100px;
+    }
+
+    /* ── SECTIONS ── */
+    .pp-section {
+      margin-bottom: 56px;
+      scroll-margin-top: 80px;
+    }
+
+    .pp-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.8vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+
+    .pp-section h2 .num {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .pp-section h3 {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin: 28px 0 12px;
+    }
+
+    .pp-section p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 16px;
+    }
+
+    .pp-section p:last-child { margin-bottom: 0; }
+
+    .pp-section ul, .pp-section ol {
+      margin: 0 0 16px 20px;
+    }
+
+    .pp-section li {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 6px;
+    }
+
+    .legal-caps {
+      font-size: 13px;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.55);
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      padding: 20px 24px;
+      margin-bottom: 16px;
+    }
+
+    /* Cookie table */
+    .cookie-type {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--blue);
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .cookie-type-name {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .cookie-type p {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+
+    /* California data table */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 13.5px;
+    }
+
+    .data-table th {
+      background: var(--surface);
+      color: var(--blue);
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .data-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      color: rgba(255,255,255,0.65);
+      vertical-align: top;
+    }
+
+    .data-table tr:last-child td { border-bottom: none; }
+
+    .pp-section a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .pp-section a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 32px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .page-footer-copy { font-size: 13px; color: var(--gray-1); }
+
+    .page-footer a {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .page-hero { padding: 40px 5% 32px; }
+      .page-wrap { padding: 48px 5% 72px; }
+      .data-table { font-size: 12px; }
+      .data-table th, .data-table td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <img src="alpine logo.png" alt="Alpine Nutrition" class="nav-logo" />
+    <a href="index.html" class="nav-back">← Back to Site</a>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-label">Legal</div>
+    <h1>Privacy Policy</h1>
+    <div class="page-hero-meta">Last Updated: April 19, 2026 &nbsp;·&nbsp; Alpine Nutrition LLC</div>
+  </div>
+
+  <div class="page-wrap">
+
+    <section class="pp-section" id="acceptance">
+      <h2><span class="num">01</span> Acceptance of Privacy Policy</h2>
+      <p>Welcome to Alpine Nutrition ("Alpine," "we," or "us") and our Privacy Policy. This Privacy Policy is important and affects your legal rights, so please read carefully.</p>
+      <p>By accessing or using alpinenu.com and various related websites and services (collectively, the "Alpine Services"), you agree to be bound by this Privacy Policy and all of the terms incorporated herein by reference. By using the Alpine Services and/or submitting or collecting any personal data via the Alpine Services, you accept and expressly consent and agree to our practices surrounding the collection, use, and sharing of your personal information in accordance with this Privacy Policy. If you do not consent and agree with the terms of this Privacy Policy, you cannot, and we do not authorize you to, access, browse, or use the Alpine Services.</p>
+      <p>Our processing of personal information, such as your name, address, e-mail address, or telephone number, shall be undertaken consistent with the requirements of applicable privacy laws, including, but not limited to, the California Consumer Privacy Act ("CCPA"), the General Data Protection Regulation ("GDPR"), the UK General Data Protection Regulation ("UK GDPR"), and the Canadian Personal Information Protection and Electronic Documents Act ("PIPEDA").</p>
+    </section>
+
+    <section class="pp-section" id="information-collected">
+      <h2><span class="num">02</span> Information We Collect</h2>
+
+      <h3>2.1 Personal Information We Collect Directly from You</h3>
+      <p>We receive personal information directly from you when you voluntarily provide us with such personal information, including, without limitation, the following:</p>
+      <ul>
+        <li>Personal information (such as your e-mail address and phone number);</li>
+        <li>Company information (such as your company's address); and</li>
+        <li>Other identifying information that you voluntarily choose to provide to us, including without limitation unique identifiers such as passwords, and personal information in messages you send to us.</li>
+      </ul>
+      <p>We may also collect additional information, which may be personal information, as otherwise described to you at the point of collection or pursuant to your consent.</p>
+
+      <h3>2.2 Information We Automatically Collect When You Use Our Site</h3>
+      <p>In order to access and use certain areas or features of the Alpine Services, you consent to our collection and use of certain information about your use of the Alpine Services through the use of tracking technologies or by other passive means. Your consent to our access and use of this "passively collected" information includes, but is not limited to, the domain name of the website that allowed you to navigate to the Alpine Services, search engines used, the internet protocol (IP) address used, the length of time spent on the Alpine Services, the pages you looked at on the Alpine Services, other webpages you visited before and after visiting the Alpine Services, the type of device and/or internet browser you have, the frequency of your visits to the Alpine Services, and other relevant statistics (collectively "Traffic Data").</p>
+    </section>
+
+    <section class="pp-section" id="how-collected">
+      <h2><span class="num">03</span> How We Collect Information</h2>
+      <p>We collect information (including personal information and Traffic Data) when you use and interact with the Alpine Services, and in some cases from third party sources. Such means of collection include:</p>
+      <ul>
+        <li>When you use the Alpine Services' interactive tools and services;</li>
+        <li>When you voluntarily provide information in free-form text boxes through the Alpine Services or through responses to surveys, questionnaires and the like;</li>
+        <li>If you use a location-enabled browser, we may receive information about your location and mobile device, as applicable;</li>
+        <li>Through cookies, web beacons, analytics services and other tracking technology (collectively, "Tracking Tools"), as described below; and</li>
+        <li>When you use the "Contact Us" function on the Alpine Services, send us an email or otherwise contact us.</li>
+      </ul>
+      <p>The above excludes text messaging originator opt-in data and consent; this information will not be shared with any third parties.</p>
+    </section>
+
+    <section class="pp-section" id="tracking">
+      <h2><span class="num">04</span> Tracking Tools, Behavioral Advertising, and Opt-Out Options</h2>
+
+      <h3>4.1 Tracking Tools</h3>
+      <p>We may use tools outlined below in order to provide the Alpine Services, advertise to, and better understand users.</p>
+
+      <p><strong style="color:#fff;">Cookies</strong> — "Cookies" are small computer files transferred to your computing device that contain information such as user ID, user preferences, lists of pages visited and activities conducted while using the Alpine Services. We use Cookies to improve or tailor the Alpine Services, customize advertisements by tracking navigation habits, measuring performance, and storing authentication status so re-entering credentials is not required. For more information on Cookies, visit <a href="http://www.allaboutcookies.org" target="_blank" rel="noopener">allaboutcookies.org</a>.</p>
+
+      <div class="cookie-type">
+        <div class="cookie-type-name">Absolutely Necessary Cookies</div>
+        <p>Essential to enable you to move around a website and use its features. Without these Cookies, services you have asked for, like adding items to an online order, cannot be provided.</p>
+      </div>
+      <div class="cookie-type">
+        <div class="cookie-type-name">Performance Cookies</div>
+        <p>Collect information about how you use our Alpine Services — such as browsers used, pages viewed, and duration of visit. These Cookies collect only aggregated, anonymous information and do not personally identify you.</p>
+      </div>
+      <div class="cookie-type">
+        <div class="cookie-type-name">Functionality Cookies</div>
+        <p>Allow the Alpine Services to remember choices you make (such as your username, language preference, or region) and provide enhanced, more personal features. They cannot track your browsing activity on other websites.</p>
+      </div>
+      <div class="cookie-type">
+        <div class="cookie-type-name">Cart Cookies</div>
+        <p>Alpine uses cookies to help keep track of items you put into your shopping cart including when you have abandoned your cart and this information is used to determine when to send cart reminder messages via SMS.</p>
+      </div>
+
+      <p style="margin-top:20px;"><strong style="color:#fff;">Web Beacons</strong> — Tiny graphic image files embedded in a web page or email that may be used to collect information about the use of our Alpine Services, the websites of selected advertisers and the emails, special promotions or newsletters that we send.</p>
+
+      <p><strong style="color:#fff;">Web Service Analytics</strong> — We may use third-party analytics services to register mouse clicks, mouse movements, scrolling activity and text typed into the Alpine Services. These services generally do not collect personal information unless you voluntarily provide it.</p>
+
+      <p><strong style="color:#fff;">Mobile Device Identifiers</strong> — Data stored on mobile devices that may track mobile devices and data and activities occurring on and through it, as well as the applications installed on it. Mobile device identifiers enable collection of personal information (such as media access control, address and location) and Traffic Data.</p>
+
+      <h3>4.2 Behavioral Advertising</h3>
+      <p>We may use interest-based or online behavioral advertising. This means that some of our partners use Tracking Tools to collect information about a user's online activities to display Alpine ads to the user based on the user's interests ("Behavioral Advertising"). Such partners may include third-party service providers, advertisers, advertising networks or platforms, traffic measurement service providers, marketing analytics service providers, and other third-party service providers.</p>
+
+      <h3>4.3 Options for Opting Out of Cookies and Mobile Device Identifiers</h3>
+      <p>If we process Cookies based on your consent, you have the right to withdraw your consent at any point in time by contacting us at <a href="mailto:Support@alpinenu.com">Support@alpinenu.com</a>.</p>
+      <p>You may opt out of receiving certain Cookies and certain trackers by visiting the <a href="https://optout.networkadvertising.org/" target="_blank" rel="noopener">Network Advertising Initiative (NAI) opt-out page</a> or the <a href="https://optout.aboutads.info/" target="_blank" rel="noopener">Digital Advertising Alliance (DAA) opt-out page</a>. Even after opting out of Behavioral Advertising, you may still see Alpine advertisements that are not interest-based.</p>
+      <p>This Privacy Policy does not cover the use of Cookies and other Tracking Tools by any third parties, and we aren't responsible for their privacy policies and practices.</p>
+
+      <h3>4.4 How Alpine Responds to Browser "Do Not Track" (DNT) Signals</h3>
+      <p>Some web browsers incorporate a "Do Not Track" (DNT) or similar feature that signals to web services that a visitor does not want to have their online activity and behavior tracked. Not all browsers offer a DNT option and there is currently no industry consensus as to what constitutes a DNT signal. For these reasons, Alpine does not proactively respond to DNT signals. For more information about DNT signals, visit <a href="http://allaboutdnt.com" target="_blank" rel="noopener">allaboutdnt.com</a>.</p>
+    </section>
+
+    <section class="pp-section" id="how-used">
+      <h2><span class="num">05</span> How We Use Your Information</h2>
+      <p>We do not engage in automated decision making. We may use information to better understand who uses the Alpine Services and how we can deliver a better user experience. Specifically, such use may include:</p>
+      <ul>
+        <li>Providing you with the products, services and information you request;</li>
+        <li>Corresponding with you;</li>
+        <li>Providing, maintaining, administering or expanding the Alpine Services, performing business analyses, or for other internal purposes to support, improve or enhance our business;</li>
+        <li>Sending you information about Alpine or our products or the Alpine Services;</li>
+        <li>Combining information received from third parties with information that we have from or about you and using the combined information for any of the purposes described in this Privacy Policy;</li>
+        <li>Showing you advertisements, including interest-based or online behavioral advertising;</li>
+        <li>Using statistical information that we collect in any way permitted by law, including from third parties in connection with their commercial and marketing efforts;</li>
+        <li>Fulfilling our legally required obligations, such as preventing, detecting and investigating security incidents and potentially illegal or prohibited activities;</li>
+        <li>Protecting against or deterring fraudulent, illegal, or harmful actions; and</li>
+        <li>Enforcing our Privacy Policy and other agreements.</li>
+      </ul>
+      <p>By providing your e-mail and/or phone number and taking an affirmative action (such as checking a box or clicking "complete"), you are consenting to receive e-mails and/or calls and text messages, including live, prerecorded, and/or automated calls and text messages and alerts, to that phone number. Normal message and data rates may apply. Message frequency may vary.</p>
+    </section>
+
+    <section class="pp-section" id="how-shared">
+      <h2><span class="num">06</span> How We Share Your Information</h2>
+      <p>We do not sell your personal information to third parties. We may share your personal information with our partners to customize or display our advertising. In certain circumstances we may share certain information we collect from you:</p>
+      <ul>
+        <li>We may share your personal information and/or Traffic Data with our partners who perform operational services (such as hosting, billing, fulfillment, data storage, security, web service analytics, or ad serving) and/or who make certain services, features or functionality available to our users.</li>
+        <li>We may transfer your personal information to another company in connection with a proposed merger, sale, acquisition or other change of ownership or control by or of Alpine. Should one of these events occur, we will make reasonable efforts to notify you before your information becomes subject to different privacy and security policies and practices.</li>
+        <li>We also may need to disclose your personal information if we determine in good faith that such disclosure is needed to: (1) comply with or fulfill our obligations under applicable law, regulation, court order or other legal process; (2) protect the rights, property or safety of you, Alpine or another party; (3) enforce this Privacy Policy or other agreements with you; or (4) respond to claims that any posting or other content violates third-party rights.</li>
+      </ul>
+    </section>
+
+    <section class="pp-section" id="security">
+      <h2><span class="num">07</span> Storage and Security of Information</h2>
+      <p>Please note that any information you send to us electronically, while using the Alpine Services or otherwise interacting with us, may not be secure when it is transmitted to us. We recommend that you do not use unsecure channels to communicate sensitive or confidential information to us. Despite our best efforts, no security measures are perfect or impenetrable, and we cannot guarantee "perfect security." Any information you send us through any means is transmitted at your own risk.</p>
+    </section>
+
+    <section class="pp-section" id="choices">
+      <h2><span class="num">08</span> Your Choices</h2>
+
+      <h3>8.1 Information You Provide</h3>
+      <p>You can always choose whether or not to provide personal information through the Alpine Services. However, if you choose not to disclose certain personal information, you may not be able to register as a user of the Alpine Services, which may limit your access to certain portions of the Alpine Services. We will not discriminate against you for exercising any of your rights.</p>
+
+      <h3>8.2 California Privacy Rights</h3>
+      <p>In the preceding 12 months, we collected and disclosed for a business purpose the following categories of personal information about California consumers:</p>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Examples</th>
+            <th>Collected?</th>
+            <th>Categories of Recipients</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Identifiers</td>
+            <td>Name, address, e-mail address, IP address</td>
+            <td>Yes</td>
+            <td>Organizations providing services to Alpine</td>
+          </tr>
+          <tr>
+            <td>Personal information categories listed in the California Customer Records statute</td>
+            <td>Name, professional related information; and employment related information</td>
+            <td>No</td>
+            <td>Organizations providing services to Alpine</td>
+          </tr>
+          <tr>
+            <td>Protected classification characteristics under California or federal law</td>
+            <td>Age, citizenship, nationality, ancestry, religion, marital status, medical condition, disability, sex, sexual orientation, veteran or military status</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Internet or other similar network activity</td>
+            <td>Browsing history, search history, information on a consumer's interaction with the Alpine Services</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Geolocation data</td>
+            <td>Location and movement data</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Professional or employment-related information</td>
+            <td>Proof of eligibility to work, resumé, other professional-related information</td>
+            <td>No</td>
+            <td>Organizations providing services to Alpine</td>
+          </tr>
+          <tr>
+            <td>Biometric information</td>
+            <td>None</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Education Information</td>
+            <td>None</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Inferences from the foregoing</td>
+            <td>None</td>
+            <td>No</td>
+            <td>No</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p>Your Rights. Where applicable, if you are a California resident you may have the following rights under the CCPA:</p>
+      <ul>
+        <li><strong style="color:#fff;">Right to Know/Access:</strong> You have the right to request that we disclose certain information about our collection and use of your personal information, including the specific pieces collected, categories of sources, purposes for collection, and categories of third parties with whom we shared it.</li>
+        <li><strong style="color:#fff;">Right to Delete:</strong> You have the right to request that we delete your personal information.</li>
+        <li><strong style="color:#fff;">Freedom from Discrimination:</strong> You have the right to be free from unlawful discrimination for exercising any of the rights above.</li>
+      </ul>
+      <p>To make a request in relation to the above rights, please contact us using the information in Section 13 below. Only you, or someone legally authorized to act on your behalf, may make a request related to personal information collected about you.</p>
+
+      <h3>8.3 Canada, European Union and United Kingdom Privacy Rights</h3>
+      <p>If our processing of your personal information is subject to the GDPR, UK GDPR, and/or PIPEDA, and unless subject to an exemption, you may have the following rights with respect to your personal data:</p>
+      <ul>
+        <li>The right to request a copy of your personal data which we hold about you;</li>
+        <li>The right to request that we correct any personal data about you;</li>
+        <li>The right to request your personal data be erased where it is no longer necessary for us to retain such data;</li>
+        <li>The right to withdraw your consent at any time to the processing of personal data;</li>
+        <li>The right to request that we provide you with a copy of your personal data;</li>
+        <li>The right to request a restriction be placed on further processing where there is a dispute in relation to accuracy or processing;</li>
+        <li>The right to object to the processing of personal data (where applicable); and</li>
+        <li>The right to lodge a complaint with a data supervisory authority.</li>
+      </ul>
+      <p>If you are a resident of the European Economic Area ("EEA"), when we process your personal data, we will only do so where we need to use your personal data to perform our responsibilities under our agreement with you, where we have a legitimate interest in processing your personal data, or where we have your consent to do so.</p>
+    </section>
+
+    <section class="pp-section" id="retention">
+      <h2><span class="num">09</span> How Long We Retain Your Information</h2>
+      <p>We retain personal information about you for as long as necessary to provide you the Alpine Services. In some cases, we retain personal information for longer, if doing so is necessary to comply with our legal obligations, resolve disputes or collect fees owed, prevent fraud, or enforce this Privacy Policy. Afterwards, we retain some information in a de-identified and/or aggregated form but not in a way that would identify you personally.</p>
+    </section>
+
+    <section class="pp-section" id="children">
+      <h2><span class="num">10</span> Information Provided on Behalf of Children and Others</h2>
+      <p>The Alpine Services is not intended for use by children and individuals under the age of 18 are prohibited from using the Alpine Services. Alpine does not knowingly collect any information from children, nor is the Alpine Services directed to children. If you are under 18, please do not attempt to register for the Alpine Services or send any personal information about yourself to us.</p>
+      <p>If you are a parent or legal guardian of a minor child, you may, in compliance with this Privacy Policy, use the Alpine Services on behalf of such minor child. Any information that you provide us while using the Alpine Services on behalf of your minor child will be treated as personal information as otherwise provided herein.</p>
+    </section>
+
+    <section class="pp-section" id="pixels">
+      <h2><span class="num">11</span> Third Party Pixels and Cookies</h2>
+      <p>When you visit our website, we and our third-party partners (such as analytics providers and advertising platforms) may use cookies, pixels, and similar technologies to collect information about your browsing activity. This may include your IP address, device information, pages visited, and interactions with our site.</p>
+      <p>We use this information to operate and improve our website, understand user behavior, and deliver and measure advertising.</p>
+      <p>You can control cookies through your browser settings and other tools. You may also opt out of certain targeted advertising by visiting:</p>
+      <ul>
+        <li><a href="https://optout.aboutads.info/" target="_blank" rel="noopener">optout.aboutads.info</a></li>
+        <li><a href="https://www.networkadvertising.org/choices/" target="_blank" rel="noopener">networkadvertising.org/choices</a></li>
+      </ul>
+    </section>
+
+    <section class="pp-section" id="third-party">
+      <h2><span class="num">12</span> Third Party Web Services</h2>
+      <p>The Site contains links to or embedded content from third party web services. A link to or embedded content from a non-Alpine web service does not mean that we endorse that web service, the quality or accuracy of information presented on the non-Alpine web service or the persons or entities associated with the non-Alpine web service. If you decide to visit a third party web service, you are subject to the privacy policy of the third party web service as applicable and we are not responsible for the policies and practices of the third-party web service.</p>
+      <p>We sell products through TikTok Shop, a third-party platform operated by TikTok. When you purchase through TikTok Shop, TikTok may collect and process your personal information in accordance with their own privacy policy, which is separate from ours. Alpine does not control TikTok's data collection practices. We encourage you to review <a href="https://www.tiktok.com/legal/page/us/privacy-policy/en" target="_blank" rel="noopener">TikTok's Privacy Policy</a> before making a purchase.</p>
+    </section>
+
+    <section class="pp-section" id="updates">
+      <h2><span class="num">13</span> Updates and Changes to Privacy Policy</h2>
+      <p>The effective date of this Privacy Policy is set forth at the top of this webpage. We will notify you of any material change by posting notice on this webpage. Your continued use of the Alpine Services after the effective date constitutes your acceptance of the amended Privacy Policy. We encourage you to periodically review this page for the latest information on our privacy practices. Any amended Privacy Policy supersedes all previous versions.</p>
+      <p class="legal-caps">IF YOU DO NOT AGREE TO FUTURE CHANGES TO THIS PRIVACY POLICY, YOU MUST STOP USING THE ALPINE SERVICES AFTER THE EFFECTIVE DATE OF SUCH CHANGES.</p>
+    </section>
+
+    <section class="pp-section" id="contact">
+      <h2><span class="num">14</span> Contact Us</h2>
+      <p>The data controller for the purposes of GDPR, UK GDPR, PIPEDA or other data protection laws is Alpine.</p>
+      <p>If you have any comments, concerns or questions about this Privacy Policy, please contact us at <a href="mailto:Support@alpinenu.com">Support@alpinenu.com</a>.</p>
+    </section>
+
+  </div>
+
+  <footer class="page-footer">
+    <span class="page-footer-copy">&copy; 2026 Alpine Nutrition LLC. All rights reserved.</span>
+    <a href="index.html">← Back to Alpine Reset</a>
+  </footer>
+
+</body>
+</html>
