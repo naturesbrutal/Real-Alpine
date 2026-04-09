@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us — Alpine Nutrition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #3B9EFF;
+      --bg: #0A1628;
+      --surface: #0e1e36;
+      --border: rgba(255,255,255,0.07);
+      --gray-1: #8FA8C0;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background: var(--bg);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,22,40,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(59,158,255,0.1);
+      padding: 0 6%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo { width: 120px; height: auto; filter: invert(1); }
+
+    .nav-back {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: #fff; }
+
+    /* ── HERO BAR ── */
+    .page-hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 6% 48px;
+    }
+
+    .page-hero-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 0.97;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .page-hero-meta {
+      font-size: 13px;
+      color: var(--gray-1);
+    }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 6% 100px;
+    }
+
+    /* ── BODY COPY ── */
+    .about-body p {
+      font-size: 16px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.72);
+      margin-bottom: 24px;
+    }
+
+    .about-body p:last-child { margin-bottom: 0; }
+
+    /* ── PULL QUOTE ── */
+    .about-quote {
+      border-left: 3px solid var(--blue);
+      padding: 20px 28px;
+      margin: 48px 0;
+      background: rgba(59,158,255,0.05);
+      border-radius: 0 4px 4px 0;
+    }
+
+    .about-quote p {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3.2vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 0;
+    }
+
+    /* ── SIGNATURE BLOCK ── */
+    .about-signature {
+      margin-top: 56px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+
+    .about-signature-name {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.8vw, 28px);
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+
+    .about-signature-title {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.10em;
+      text-transform: uppercase;
+      color: var(--blue);
+    }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 32px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .page-footer-copy {
+      font-size: 13px;
+      color: var(--gray-1);
+    }
+
+    .page-footer a {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .page-hero { padding: 40px 5% 32px; }
+      .page-wrap { padding: 48px 5% 72px; }
+      .about-quote { padding: 16px 20px; margin: 36px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <img src="alpine logo.png" alt="Alpine Nutrition" class="nav-logo" />
+    <a href="index.html" class="nav-back">← Back to Site</a>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-label">Our Story</div>
+    <h1>About Us</h1>
+    <div class="page-hero-meta">Alpine Nutrition LLC</div>
+  </div>
+
+  <div class="page-wrap">
+
+    <div class="about-body" id="story">
+
+      <p>I'm Charlie Kaludis, the Co-Founder of Alpine Nutrition.</p>
+
+      <p>I'm a D1 football player at Princeton, and my co-founder is a cross country runner. We come from completely different ends of the athletic spectrum, but we share the same standard when it comes to taking care of our bodies.</p>
+
+      <p>We're also college students. We wanted to enjoy the full college experience — going out, having fun, drinking — but without compromising our athletic performance and recovery. That's why we created Alpine Reset.</p>
+
+      <p>All the traditional hangover remedies we tried felt like they weren't sufficient for people who care about performance. Nothing was built for athletes who wanted both: a social life and a high standard of recovery.</p>
+
+    </div>
+
+    <div class="about-quote" id="mission">
+      <p>So we built it ourselves.</p>
+    </div>
+
+    <div class="about-body" id="product">
+
+      <p>Alpine Reset is our answer. Our proprietary formula is designed to help you recover faster, stay sharp, and keep performing without sacrificing the moments you actually want to enjoy.</p>
+
+      <p>We're just getting started. But the message is simple: don't compromise.</p>
+
+    </div>
+
+    <div class="about-signature" id="founder">
+      <div class="about-signature-name">Charlie Kaludis</div>
+      <div class="about-signature-title">Co-Founder, Alpine Nutrition</div>
+    </div>
+
+  </div>
+
+  <footer class="page-footer">
+    <span class="page-footer-copy">&copy; 2026 Alpine Nutrition LLC. All rights reserved.</span>
+    <a href="index.html">← Back to Alpine Reset</a>
+  </footer>
+
+</body>
+</html>
