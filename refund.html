@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Refund Policy — Alpine Nutrition</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #3B9EFF;
+      --bg: #0A1628;
+      --surface: #0e1e36;
+      --border: rgba(255,255,255,0.07);
+      --gray-1: #8FA8C0;
+      --font-display: 'Barlow Condensed', sans-serif;
+      --font-body: 'Barlow', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+
+    body {
+      background: var(--bg);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,22,40,0.97);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(59,158,255,0.1);
+      padding: 0 6%;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-logo { width: 120px; height: auto; filter: invert(1); }
+
+    .nav-back {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: #fff; }
+
+    /* ── HERO BAR ── */
+    .page-hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 6% 48px;
+    }
+
+    .page-hero-label {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .page-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 0.97;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .page-hero-meta {
+      font-size: 13px;
+      color: var(--gray-1);
+    }
+
+    /* ── LAYOUT ── */
+    .page-wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 72px 6% 100px;
+    }
+
+    /* ── SECTIONS ── */
+    .tos-section {
+      margin-bottom: 56px;
+      scroll-margin-top: 80px;
+    }
+
+    .tos-section h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.8vw, 28px);
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: #fff;
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+    }
+
+    .tos-section h2 .num {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.10em;
+      color: var(--blue);
+      flex-shrink: 0;
+    }
+
+    .tos-section p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 16px;
+    }
+
+    .tos-section p:last-child { margin-bottom: 0; }
+
+    .tos-section ul {
+      margin: 0 0 16px 0;
+      padding-left: 20px;
+    }
+
+    .tos-section ul li {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.70);
+      margin-bottom: 6px;
+    }
+
+    /* Highlight box for important pre-purchase info */
+    .policy-notice {
+      background: rgba(59,158,255,0.06);
+      border: 1px solid rgba(59,158,255,0.20);
+      border-left: 3px solid var(--blue);
+      padding: 20px 24px;
+      margin-bottom: 56px;
+      border-radius: 0 4px 4px 0;
+    }
+
+    .policy-notice p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 8px;
+    }
+
+    .policy-notice p:last-child { margin-bottom: 0; }
+
+    .policy-notice strong {
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .tos-section a {
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .tos-section a:hover { text-decoration: underline; }
+
+    /* ── FOOTER ── */
+    .page-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 32px 6%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .page-footer-copy {
+      font-size: 13px;
+      color: var(--gray-1);
+    }
+
+    .page-footer a {
+      color: var(--blue);
+      text-decoration: none;
+      font-size: 13px;
+    }
+
+    @media (max-width: 700px) {
+      .page-hero { padding: 40px 5% 32px; }
+      .page-wrap { padding: 48px 5% 72px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <img src="alpine logo.png" alt="Alpine Nutrition" class="nav-logo" />
+    <a href="index.html" class="nav-back">← Back to Site</a>
+  </nav>
+
+  <div class="page-hero">
+    <div class="page-hero-label">Legal</div>
+    <h1>Refund Policy</h1>
+    <div class="page-hero-meta">Alpine Nutrition LLC &nbsp;·&nbsp; support@alpinenu.com</div>
+  </div>
+
+  <div class="page-wrap">
+
+    <div class="policy-notice">
+      <p>We built Alpine Reset to actually work. Every ingredient is carefully selected and clinically backed to support your body when it needs it most. We're confident you'll feel the difference.</p>
+      <p>If you're not completely satisfied, we make it simple to request a refund.</p>
+      <p><strong>Important information before purchasing:</strong> Refund eligibility is strictly limited to first orders only and a maximum of two tubs. All other sales are final except as explicitly stated below.</p>
+    </div>
+
+    <section class="tos-section" id="first-order">
+      <h2><span class="num">01</span> 60-Day First-Order Refund Policy</h2>
+      <p>We offer a 60-day refund policy on your first order with Alpine Nutrition.</p>
+      <p>You have 60 days from the date you receive your order to request a refund. This policy applies only to your first purchase with Alpine Nutrition.</p>
+      <p>The first-order refund policy covers a maximum of two tubs total from that first order, whether opened or unopened. Refunds are strictly limited to two tubs under any circumstances.</p>
+      <p>To request a refund, please contact us at <a href="mailto:support@alpinenu.com">support@alpinenu.com</a>. If your request is approved, your refund will be issued to your original payment method or as store credit, based on your preference.</p>
+      <p>Approved refunds are issued minus a $5 processing fee. Shipping charges are not refundable.</p>
+      <p>After your first order, all sales are final except in cases of damaged or incorrect items.</p>
+    </section>
+
+    <section class="tos-section" id="additional-returns">
+      <h2><span class="num">02</span> Additional Return Requests Beyond the First Order</h2>
+      <p>After a customer's first approved return and refund, all subsequent purchases are considered final sales, with a limited exception outlined below. We may allow additional return requests only if all of the following conditions are met:</p>
+      <ul>
+        <li>The tub must be completely unopened and unused</li>
+        <li>The customer must request and receive return approval in advance by contacting <a href="mailto:support@alpinenu.com">support@alpinenu.com</a></li>
+        <li>The customer is fully responsible for returning the product to us, including all shipping costs</li>
+        <li>Returned products must be received in resalable condition</li>
+      </ul>
+      <p>If approved, returns beyond the first order are eligible for store credit only. Store credit will be issued based on the amount paid on the original order, not the current retail value of the product. Cash refunds, refunds to the original payment method, replacements, or exchanges are not available for return requests beyond the first order.</p>
+      <p>Any return sent without prior approval will not be accepted.</p>
+    </section>
+
+    <section class="tos-section" id="damages">
+      <h2><span class="num">03</span> Damages &amp; Issues</h2>
+      <p>Please inspect your order upon arrival.</p>
+      <p>If your order arrives damaged, defective, or incorrect, contact us as soon as possible at <a href="mailto:support@alpinenu.com">support@alpinenu.com</a>. We will work quickly to resolve the issue with a replacement or refund, as appropriate.</p>
+    </section>
+
+    <section class="tos-section" id="exceptions">
+      <h2><span class="num">04</span> Exceptions / Non-Returnable Items</h2>
+      <p>To keep our policy fair and consistent for all customers, the following items are not eligible for refunds or returns unless otherwise required by law:</p>
+      <ul>
+        <li>Opened or used products beyond the two-tub first-order allowance</li>
+      </ul>
+      <p>If you are unsure whether your item qualifies, please reach out to our support team. We are always happy to help clarify.</p>
+    </section>
+
+    <section class="tos-section" id="timing">
+      <h2><span class="num">05</span> Refund Timing</h2>
+      <p>Once your refund request is approved, we will process it as quickly as possible.</p>
+      <p>If a return is not required, refunds are typically issued within 3–5 business days of approval.</p>
+      <p>If a return is required, your refund will be issued after we receive and inspect the product. Once we receive and inspect your return, the refund will be sent to your original payment method or issued as store credit within 3–5 business days from the date of receipt.</p>
+      <p>Please note that additional time may be required for your bank or credit card provider to post the refund. If more than 10 business days have passed since approval, please contact us at <a href="mailto:support@alpinenu.com">support@alpinenu.com</a>.</p>
+    </section>
+
+    <section class="tos-section" id="cancellations">
+      <h2><span class="num">06</span> Cancellations</h2>
+      <p>Orders cannot be canceled once they have been placed.</p>
+    </section>
+
+    <section class="tos-section" id="abuse">
+      <h2><span class="num">07</span> Refund Abuse &amp; Policy Enforcement</h2>
+      <p>We reserve the right to refuse refunds, returns, or exchanges if we detect abuse of this policy, including but not limited to repeated refund requests, excessive returns, multiple accounts, or attempts to circumvent refund limits.</p>
+      <p>Refunds are limited to one approved refund per customer, household, or shipping address. Any attempt to bypass these limits may result in denial of refund eligibility.</p>
+      <p>We also reserve the right to limit or deny refunds for orders associated with suspected fraud, resale activity, or violation of our Terms of Service.</p>
+    </section>
+
+  </div>
+
+  <footer class="page-footer">
+    <span class="page-footer-copy">&copy; 2026 Alpine Nutrition LLC. All rights reserved.</span>
+    <a href="index.html">← Back to Alpine Reset</a>
+  </footer>
+
+</body>
+</html>
