@@ -135,13 +135,15 @@
 
     .about-signature-img {
       display: block;
-      width: 260px;
+      width: 300px;
       height: auto;
       filter: invert(1);
       mix-blend-mode: screen;
-      /* Compensate for internal image padding so strokes sit flush above name */
-      margin-left: -20px;
-      margin-bottom: -22px;
+      /* Shift left to align visual stroke edge with text, not image box edge */
+      position: relative;
+      left: -58px;
+      /* Pull name up so it sits under the actual strokes, not the image padding */
+      margin-bottom: -54px;
     }
 
     .about-signature-name {
