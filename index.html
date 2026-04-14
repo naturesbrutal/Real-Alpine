@@ -373,11 +373,52 @@
       margin: 0 auto 16px;
     }
 
-    .ingredients-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+    /* ── Ingredients carousel ── */
+    .ingredients-carousel {
+      position: relative;
     }
+
+    .ingredients-track {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 2px; /* prevents bottom clip on focus rings */
+    }
+    .ingredients-track::-webkit-scrollbar { display: none; }
+
+    /* 4 cards visible on desktop */
+    .ingredients-track .ingredient-card {
+      flex: 0 0 calc(25% - 9px);
+      scroll-snap-align: start;
+    }
+
+    /* Arrow buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: rgba(10, 22, 40, 0.88);
+      border: 1px solid rgba(59, 158, 255, 0.35);
+      color: #3B9EFF;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: background 0.2s, border-color 0.2s, opacity 0.2s;
+      padding: 0;
+    }
+    .carousel-btn svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+    .carousel-btn:hover { background: rgba(59,158,255,0.18); border-color: rgba(59,158,255,0.7); }
+    .carousel-btn:disabled { opacity: 0.25; cursor: default; pointer-events: none; }
+    .carousel-btn-prev { left: -22px; }
+    .carousel-btn-next { right: -22px; }
 
     .ingredient-card {
       position: relative;
@@ -1049,7 +1090,10 @@
 
     /* ── Tablet: 1024px ── */
     @media (max-width: 1024px) {
-      .ingredients-grid { grid-template-columns: repeat(2, 1fr); }
+      /* 3 cards visible on tablet */
+      .ingredients-track .ingredient-card { flex: 0 0 calc(33.333% - 8px); }
+      .carousel-btn-prev { left: -16px; }
+      .carousel-btn-next { right: -16px; }
       .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
     }
 
@@ -1192,8 +1236,13 @@
       .hero-pills { gap: 6px; }
       .hero-pill  { font-size: 10px; padding: 5px 11px; }
 
-      /* — Ingredients grid — */
-      .ingredients-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      /* — Ingredients carousel — */
+      /* 2 cards visible on mobile */
+      .ingredients-track .ingredient-card { flex: 0 0 calc(50% - 6px); }
+      .carousel-btn { width: 36px; height: 36px; }
+      .carousel-btn svg { width: 14px; height: 14px; }
+      .carousel-btn-prev { left: -4px; }
+      .carousel-btn-next { right: -4px; }
       .ingredient-card-name { font-size: 17px; }
       .ingredient-card-desc { font-size: 11px; }
       .ingredient-card-overlay { padding: 14px 14px 12px; }
@@ -1274,7 +1323,8 @@
       .problem-title { font-size: clamp(28px, 9vw, 44px); }
       .lifestyle-title { font-size: clamp(32px, 10vw, 56px); }
 
-      /* 2-col ingredient grid stays but shrink text more */
+      /* 1.4 cards visible on very small phones */
+      .ingredients-track .ingredient-card { flex: 0 0 calc(72% - 4px); }
       .ingredient-card-name    { font-size: 15px; }
       .ingredient-card-desc    { font-size: 10px; }
       .ingredient-card-overlay { padding: 12px 10px 10px; }
@@ -1364,112 +1414,194 @@
       <div style="font-family:var(--font-body);font-size:12px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--orange);margin-top:12px;">Clinically Dosed &nbsp;·&nbsp; Effective</div>
     </div>
 
-    <div class="ingredients-grid">
+    <div class="ingredients-carousel">
+      <button class="carousel-btn carousel-btn-prev" id="ing-prev" aria-label="Previous ingredients" disabled>
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      </button>
 
-      <div class="ingredient-card">
-        <img src="DHM.webp" alt="DHM" class="ingredient-card-img" />
-        <div class="ingredient-card-overlay">
-          <div class="ingredient-card-top">
-            <div class="ingredient-card-name">DHM</div>
-            <div class="ingredient-card-desc">Supports alcohol metabolism and reduces next-day fatigue.</div>
-          </div>
-          <div class="ingredient-card-bottom">
-            <div class="ingredient-card-dose">1,000 mg</div>
+      <div class="ingredients-track" id="ing-track">
+
+        <div class="ingredient-card">
+          <img src="DHM.webp" alt="DHM" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">DHM</div>
+              <div class="ingredient-card-desc">Supports alcohol metabolism and reduces next-day fatigue.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">1,200 mg</div></div>
           </div>
         </div>
-      </div>
 
-      <div class="ingredient-card">
-        <img src="NAC.jpg" alt="NAC" class="ingredient-card-img" />
-        <div class="ingredient-card-overlay">
-          <div class="ingredient-card-top">
-            <div class="ingredient-card-name">NAC</div>
-            <div class="ingredient-card-desc">Replenishes glutathione and supports liver detoxification.</div>
-          </div>
-          <div class="ingredient-card-bottom">
-            <div class="ingredient-card-dose">600 mg</div>
+        <div class="ingredient-card">
+          <img src="NAC.jpg" alt="NAC" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">NAC</div>
+              <div class="ingredient-card-desc">Replenishes glutathione and supports liver detoxification.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">600 mg</div></div>
           </div>
         </div>
-      </div>
 
-      <div class="ingredient-card">
-        <img src="milk-thistle.jpg" alt="Milk Thistle" class="ingredient-card-img" />
-        <div class="ingredient-card-overlay">
-          <div class="ingredient-card-top">
-            <div class="ingredient-card-name">Milk Thistle</div>
-            <div class="ingredient-card-desc">Protects liver cells and promotes regeneration.</div>
-          </div>
-          <div class="ingredient-card-bottom">
-            <div class="ingredient-card-dose">300 mg</div>
+        <div class="ingredient-card">
+          <img src="milk-thistle.jpg" alt="Milk Thistle" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">Milk Thistle</div>
+              <div class="ingredient-card-desc">Protects liver cells and promotes regeneration.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">700 mg</div></div>
           </div>
         </div>
-      </div>
 
-      <div class="ingredient-card">
-        <img src="vitamin-b.jpg" alt="B Vitamins" class="ingredient-card-img" />
-        <div class="ingredient-card-overlay">
-          <div class="ingredient-card-top">
-            <div class="ingredient-card-name">B Vitamins</div>
-            <div class="ingredient-card-desc">Replenishes nutrients depleted by alcohol metabolism.</div>
-          </div>
-          <div class="ingredient-card-bottom">
-            <div class="ingredient-card-dose">Complex</div>
+        <div class="ingredient-card">
+          <img src="vitamin-b.jpg" alt="B Vitamins" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">B Vitamins</div>
+              <div class="ingredient-card-desc">Replenishes nutrients depleted by alcohol metabolism.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">Complex</div></div>
           </div>
         </div>
-      </div>
 
-      <div class="ingredient-card">
-        <img src="electrolytes.jpg" alt="Electrolytes" class="ingredient-card-img" />
-        <div class="ingredient-card-overlay">
-          <div class="ingredient-card-top">
-            <div class="ingredient-card-name">Electrolytes</div>
-            <div class="ingredient-card-desc">Restores hydration and mineral balance.</div>
-          </div>
-          <div class="ingredient-card-bottom">
-            <div class="ingredient-card-dose">500 mg</div>
+        <div class="ingredient-card">
+          <img src="electrolytes.jpg" alt="Electrolytes" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">Electrolytes</div>
+              <div class="ingredient-card-desc">Restores hydration and mineral balance.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">3× Complex</div></div>
           </div>
         </div>
-      </div>
 
-      <div class="ingredient-card">
-        <img src="magnesium.webp" alt="Magnesium" class="ingredient-card-img" />
-        <div class="ingredient-card-overlay">
-          <div class="ingredient-card-top">
-            <div class="ingredient-card-name">Magnesium</div>
-            <div class="ingredient-card-desc">Supports relaxation, sleep quality, and muscle recovery.</div>
-          </div>
-          <div class="ingredient-card-bottom">
-            <div class="ingredient-card-dose">200 mg</div>
+        <div class="ingredient-card">
+          <img src="magnesium.webp" alt="Magnesium" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">Magnesium</div>
+              <div class="ingredient-card-desc">Supports relaxation, sleep quality, and muscle recovery.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">200 mg</div></div>
           </div>
         </div>
-      </div>
 
-      <div class="ingredient-card">
-        <img src="L-Theanine.avif" alt="L-Theanine" class="ingredient-card-img" />
-        <div class="ingredient-card-overlay">
-          <div class="ingredient-card-top">
-            <div class="ingredient-card-name">L-Theanine</div>
-            <div class="ingredient-card-desc">Promotes calm focus and reduces alcohol-induced anxiety.</div>
-          </div>
-          <div class="ingredient-card-bottom">
-            <div class="ingredient-card-dose">200 mg</div>
+        <div class="ingredient-card">
+          <img src="L-Theanine.avif" alt="L-Theanine" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">L-Theanine</div>
+              <div class="ingredient-card-desc">Promotes calm focus and reduces alcohol-induced anxiety.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">200 mg</div></div>
           </div>
         </div>
-      </div>
 
-      <div class="ingredient-card">
-        <img src="zinc.jpeg" alt="Zinc" class="ingredient-card-img" />
-        <div class="ingredient-card-overlay">
-          <div class="ingredient-card-top">
-            <div class="ingredient-card-name">Zinc</div>
-            <div class="ingredient-card-desc">Supports immune function and replenishes minerals lost overnight.</div>
-          </div>
-          <div class="ingredient-card-bottom">
-            <div class="ingredient-card-dose">15 mg</div>
+        <div class="ingredient-card">
+          <img src="zinc.jpeg" alt="Zinc" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">Zinc</div>
+              <div class="ingredient-card-desc">Supports immune function and replenishes minerals lost overnight.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">10 mg</div></div>
           </div>
         </div>
+
+        <div class="ingredient-card">
+          <img src="zinc.jpeg" alt="Prickly Pear" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">Prickly Pear</div>
+              <div class="ingredient-card-desc">Reduces inflammation and supports liver function after alcohol exposure.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">1,400 mg</div></div>
+          </div>
+        </div>
+
+        <div class="ingredient-card">
+          <img src="electrolytes.jpg" alt="Taurine" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">Taurine</div>
+              <div class="ingredient-card-desc">Replenishes a key amino acid depleted by alcohol and reduces oxidative stress.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">750 mg</div></div>
+          </div>
+        </div>
+
+        <div class="ingredient-card">
+          <img src="magnesium.webp" alt="L-Carnitine" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">L-Carnitine</div>
+              <div class="ingredient-card-desc">Supports cellular energy and helps metabolize fatty acids from alcohol processing.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">~680 mg</div></div>
+          </div>
+        </div>
+
+        <div class="ingredient-card">
+          <img src="NAC.jpg" alt="R-ALA" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">R-ALA</div>
+              <div class="ingredient-card-desc">Regenerates glutathione, neutralizes free radicals, and supports mitochondrial recovery.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">300 mg</div></div>
+          </div>
+        </div>
+
+        <div class="ingredient-card">
+          <img src="vitamin-b.jpg" alt="Niacinamide" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">Niacinamide</div>
+              <div class="ingredient-card-desc">Directly replenishes NAD+, the coenzyme burned through during alcohol metabolism.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">250 mg</div></div>
+          </div>
+        </div>
+
+        <div class="ingredient-card">
+          <img src="milk-thistle.jpg" alt="Beta-Alanine" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">Beta-Alanine</div>
+              <div class="ingredient-card-desc">Buffers muscle acidity and reduces fatigue for physical recovery.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">250 mg</div></div>
+          </div>
+        </div>
+
+        <div class="ingredient-card">
+          <img src="DHM.webp" alt="CoQ10" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">CoQ10</div>
+              <div class="ingredient-card-desc">Powers mitochondrial energy and neutralizes oxidative damage from alcohol.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">100 mg</div></div>
+          </div>
+        </div>
+
+        <div class="ingredient-card">
+          <img src="L-Theanine.avif" alt="Astaxanthin" class="ingredient-card-img" />
+          <div class="ingredient-card-overlay">
+            <div class="ingredient-card-top">
+              <div class="ingredient-card-name">Astaxanthin</div>
+              <div class="ingredient-card-desc">One of nature's most powerful antioxidants — reduces systemic inflammation.</div>
+            </div>
+            <div class="ingredient-card-bottom"><div class="ingredient-card-dose">6 mg</div></div>
+          </div>
+        </div>
+
       </div>
 
+      <button class="carousel-btn carousel-btn-next" id="ing-next" aria-label="Next ingredients">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
     </div>
   </section>
 
@@ -2102,6 +2234,29 @@
         body.classList.add('open');
       }
     }
+
+    // ── Ingredients carousel ──
+    (function () {
+      const track = document.getElementById('ing-track');
+      const prevBtn = document.getElementById('ing-prev');
+      const nextBtn = document.getElementById('ing-next');
+      if (!track || !prevBtn || !nextBtn) return;
+
+      function updateButtons() {
+        prevBtn.disabled = track.scrollLeft <= 1;
+        nextBtn.disabled = track.scrollLeft >= track.scrollWidth - track.clientWidth - 1;
+      }
+
+      function scrollByPage(dir) {
+        track.scrollBy({ left: dir * track.clientWidth, behavior: 'smooth' });
+      }
+
+      prevBtn.addEventListener('click', () => scrollByPage(-1));
+      nextBtn.addEventListener('click', () => scrollByPage(1));
+      track.addEventListener('scroll', updateButtons, { passive: true });
+      window.addEventListener('resize', updateButtons);
+      updateButtons();
+    })();
   </script>
 </body>
 </html>
