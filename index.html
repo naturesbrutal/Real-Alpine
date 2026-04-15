@@ -122,7 +122,6 @@
     /* ─── NAVIGATION ─── */
     .nav {
       position: fixed;
-      top: 0;
       left: 0;
       right: 0;
       z-index: 100;
@@ -2257,14 +2256,18 @@
       }
     }
 
-    // ── Transparent nav → solid on scroll ──
+    // ── Transparent nav → solid on scroll, positioned below trust bar ──
     (function () {
       const nav = document.querySelector('.nav');
+      const bar = document.querySelector('.announcement-bar');
       if (!nav) return;
       function updateNav() {
+        const barBottom = bar ? Math.max(0, bar.getBoundingClientRect().bottom) : 0;
+        nav.style.top = barBottom + 'px';
         nav.classList.toggle('scrolled', window.scrollY > 10);
       }
       window.addEventListener('scroll', updateNav, { passive: true });
+      window.addEventListener('resize', updateNav);
       updateNav();
     })();
 
